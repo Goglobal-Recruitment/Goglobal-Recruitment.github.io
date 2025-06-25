@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact & Submit CV - Go‑Global Recruitment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f8fc;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #003366;
+      text-align: center;
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin: 0 15px;
+    }
+    main {
+      background: white;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #003366;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in {
+      opacity: 1;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
+  </script>
+</head>
+
+<body style="background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;">
+
+  <header>
+    <h1>Contact Us & Submit Your CV</h1>
+  </header>
+
+  <nav style="display: flex; align-items: center; justify-content: space-between; padding: 0 1rem; background-color: #003366;">
+    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;">
+    <div style="display: flex; gap: 20px;">
+      <a href="index.html">Home</a>
+      <a href="expertise.html">Expertise</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main style="background-color: rgba(255, 255, 255, 0.95); border-radius: 10px;">
+    <form action="https://formsubmit.co/interviewsglo@outlook.com" method="POST" enctype="multipart/form-data">
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required placeholder="John Doe">
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required placeholder="you@example.com">
+
+      <label for="message">Message (Optional)</label>
+      <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
+
+      <label for="cv">Upload CV</label>
+      <input type="file" name="attachment" id="cv" accept=".pdf,.doc,.docx" required>
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
+
+      <button type="submit">Submit CV</button>
+    </form>
+  </main>
+
+  <footer>
+    &copy; 2025 Go‑Global Recruitment. All rights reserved.
+  </footer>
+</body>
+</html>
