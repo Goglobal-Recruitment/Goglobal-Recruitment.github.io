@@ -142,7 +142,7 @@
 </div>
 </div>
 <footer>
-  © 2025 Go‑Global Recruitment. All rights reserved.
+  © 2016 Go‑Global Recruitment. All rights reserved.
 </footer>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -164,9 +164,9 @@
       }, stepTime);
     }
 
-    animateValue("contracts", 151, 1000);
-    animateValue("experience", 15, 1000);
-    animateValue("hires", 15501, 1000);
+    animateValue("contracts", 151, 10);
+    animateValue("experience", 19, 10);
+    animateValue("hires", 15501, 10);
   });
 </script>
 </body>
@@ -176,9 +176,9 @@
     document.body.classList.add("fade-in");
 
     // Start date (adjust as needed)
-    const startDate = new Date("2024-01-01T00:00:00Z");
+    const startDate = new Date("2016-01-01T00:00:00Z");
     const now = new Date();
-    const hoursPassed = Math.floor((now - startDate) / (1000 * 60 * 60));
+    const hoursPassed = Math.floor((now - startDate) / (10 * 60 * 60));
     const ratePerHour = 2;
 
     // Base values
@@ -204,7 +204,7 @@
     }
 
     animateValue("contracts", contracts, 4000);  // Slower scroll
-    animateValue("experience", 15, 1000);        // Normal scroll
+    animateValue("experience", 19, 1000);        // Normal scroll
     animateValue("hires", hires, 4000);          // Slower scroll
   });
 </script>
