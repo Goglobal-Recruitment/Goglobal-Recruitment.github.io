@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://goglobal-recruitment.github.io/sitemap.xml
