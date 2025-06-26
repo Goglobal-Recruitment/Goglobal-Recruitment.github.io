@@ -9,52 +9,37 @@
       font-family: Arial, sans-serif;
       background-color: #e9f1fb;
       text-align: center;
-      padding: 60px 20px;
-      opacity: 0;
-      transition: opacity 0.6s ease-in;
+      padding: 40px 20px;
     }
-
-    body.fade-in {
-      opacity: 1;
-    }
-
     h1 {
       color: #003366;
-      font-size: 32px;
-      margin-bottom: 20px;
+      font-size: 28px;
     }
-
     p {
       font-size: 18px;
       color: #444;
-      margin-bottom: 30px;
-    }
-
-    a.button {
-      display: inline-block;
-      padding: 12px 24px;
-      background-color: #0055aa;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    a.button:hover {
-      background-color: #0077cc;
+      margin-top: 15px;
     }
   </style>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.body.classList.add("fade-in");
-    });
-  </script>
+<style>
+  body {
+    opacity: 0;
+    transition: opacity 0.6s ease-in;
+  }
+  body.fade-in {
+    opacity: 1;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("fade-in");
+  });
+</script>
+
 </head>
 <body>
   <h1>Thank You!</h1>
-  <p>Your message has been successfully submitted.<br>We’ll be in touch soon.</p>
-  <a href="index.html" class="button">Back to Home</a>
+  <p>Your CV has been successfully submitted. We’ll be in touch soon.</p>
 </body>
-</html>
+</html>this is my current script
