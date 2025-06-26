@@ -1,48 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Thank You - Go‑Global Recruitment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f8fc;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
-      color: #fff;
-    }
-    .message-box {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 500px;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.1rem;
-    }
-    a {
-      color: #ffd700;
-      font-weight: bold;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="message-box">
-    <h1>Thank You!</h1>
-    <p>Your submission has been received. We'll be in touch soon.</p>
-    <p><a href="index.html">← Back to Home</a></p>
-  </div>
-</body>
-</html>
+<form action="https://formspree.io/f/mvgrvbve" method="POST">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <textarea name="message"></textarea>
+
+  <!-- THIS LINE ensures redirect works -->
+  <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
+
+  <input type="hidden" name="_captcha" value="false">
+  <button type="submit">Submit CV</button>
+</form>
