@@ -2,129 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Contact & Submit CV - Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background-color: #f4f8fc;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    body.fade-in {
+      opacity: 1;
     }
-    form input, form textarea {
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #003366;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin: 0 10px;
+    }
+    main {
+      background: rgba(255, 255, 255, 0.95);
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, textarea {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
-      border-radius: 5px;
+      margin-top: 5px;
+      border-radius: 6px;
       border: 1px solid #ccc;
+      font-size: 1rem;
     }
-    form button {
+    button {
+      margin-top: 20px;
       background: #003366;
       color: white;
-      padding: 10px 20px;
       border: none;
-      margin-top: 10px;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
-      border-radius: 5px;
+      font-size: 1rem;
     }
-    #progress-result {
-      margin-top: 20px;
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #003366;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
   </style>
-</head>
-<body>
-  <div class="container">
-    <!-- Contact Form Block -->
-    <form name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact">
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email Address" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-
-    <hr style="margin: 40px 0;">
-
-    <!-- Tracker Block -->
-    <div>
-      <input type="text" id="loginNumber" placeholder="Enter Client Number (e.g. ESW942)" />
-      <button onclick="checkProgress()">Check Status</button>
-      <div id="progress-result"></div>
-    </div>
-  </div>
-
-  <!-- Tracker Script -->
   <script>
-    function parseCSV(text) {
-      const lines = text.trim().split('\\n');
-      const headers = lines[0].split(',').map(h => h.trim());
-      const entries = {};
-
-      for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(',').map(cell => cell.trim());
-        const entry = {};
-        headers.forEach((h, j) => entry[h] = row[j]);
-        entries[row[0].toUpperCase()] = entry; // key is Client Number
-      }
-      return entries;
-    }
-
-    function formatStatus(value) {
-      if (!value || value.toLowerCase() === "no") {
-        return `<span style="color: red;">❌ No</span>`;
-      }
-      if (["yes", "complete", "completed", "booked", "scheduled"].includes(value.toLowerCase())) {
-        return `<span style="color: green;">✅ ${value}</span>`;
-      }
-      return `<span style="color: orange;">⏳ ${value}</span>`;
-    }
-
-    async function checkProgress() {
-      const login = document.getElementById("loginNumber").value.trim().toUpperCase();
-      const resultDiv = document.getElementById("progress-result");
-      resultDiv.innerHTML = "Loading...";
-
-      try {
-        const res = await fetch("data.csv");
-        const text = await res.text();
-        const data = parseCSV(text);
-
-        if (data[login]) {
-          const client = data[login];
-          resultDiv.innerHTML = \`
-            <h4>Status for <span style="color:#003366">\${client["Full Name"]}</span></h4>
-            <ul>
-              <li><strong>Email:</strong> \${client["Email"]}</li>
-              <li><strong>CV Uploaded:</strong> \${formatStatus(client["CV Uploaded"])}</li>
-              <li><strong>Offer Letter:</strong> \${formatStatus(client["Offer Letter"])}</li>
-              <li><strong>Service Agreement:</strong> \${formatStatus(client["Go-Global Service Agreement"])}</li>
-              <li><strong>Employment Contract:</strong> \${formatStatus(client["Employment Contract"])}</li>
-              <li><strong>Debtform/Schedule:</strong> \${formatStatus(client["Debtform/Schedule"])}</li>
-              <li><strong>Client Service Booking:</strong> \${formatStatus(client["Client Service booking"])}</li>
-              <li><strong>Biometrics Booking:</strong> \${formatStatus(client["Biometrics Booking"])}</li>
-              <li><strong>Medical Booked:</strong> \${formatStatus(client["Medical Booked"])}</li>
-              <li><strong>Psychologist Booking:</strong> \${formatStatus(client["Psychologist Booking"])}</li>
-              <li><strong>Elites Test Booking:</strong> \${formatStatus(client["Elites Test Booking"])}</li>
-              <li><strong>Hiring Meeting:</strong> \${formatStatus(client["Hiring Company Meeting"])}</li>
-              <li><strong>Final Status:</strong> <strong>\${formatStatus(client["Final Status"])}</strong></li>
-            </ul>
-          \`;
-        } else {
-          resultDiv.innerHTML = \`<p style="color:red;">Client number not found. Please check and try again.</p>\`;
-        }
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = \`<p style="color:red;">Failed to load progress. Try again later.</p>\`;
-      }
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
   </script>
+</head>
+
+<body style="background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;">
+
+  <header>
+    <h1>Contact Us & Submit Your CV</h1>
+  </header>
+
+  <nav>
+    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+      <a href="index.html">Home</a>
+      <a href="expertise.html">Expertise</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <form action="https://formspree.io/f/mvgrvbve" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required placeholder="John Doe">
+
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email" required placeholder="you@example.com">
+
+      <label for="message">Message (Optional)</label>
+      <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
+
+      <button type="submit">Submit CV</button>
+    </form>
+  </main>
+
+  <footer>
+    &copy; 2025 Go‑Global Recruitment. All rights reserved.
+  </footer>
 </body>
 </html>
