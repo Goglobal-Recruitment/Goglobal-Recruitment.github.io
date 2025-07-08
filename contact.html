@@ -1,9 +1,10 @@
 <script>
   function parseCSV(text) {
     const rows = text.trim().split('\n');
-    const headers = rows[0].split(';').map(h => h.trim());  // Fixed delimiter
+    const cleanHeader = h => h.replace(/^\uFEFF/, '').trim(); // Remove BOM if present
+    const headers = rows[0].split(';').map(cleanHeader); // <-- Changed to semicolon
     return rows.slice(1).map(line => {
-      const vals = line.split(';').map(v => v.trim());     // Fixed delimiter
+      const vals = line.split(';').map(v => v.trim());  // <-- Also changed to semicolon
       const entry = {};
       headers.forEach((h, i) => entry[h] = vals[i] || '');
       return entry;
@@ -34,7 +35,7 @@
       );
       const txt = await res.text();
       const data = parseCSV(txt);
-      const client = data.find(c => c['Client Number']?.toUpperCase() === login);
+      const client = data.find(c => c['Client Number']?.trim().toUpperCase() === login);
 
       if (!client) {
         resultDiv.innerHTML = '<p style="color:red;">Client number not found. Please check and try again.</p>';
