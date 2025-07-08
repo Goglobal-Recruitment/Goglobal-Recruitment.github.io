@@ -5,7 +5,9 @@
   <title>Contact & Track application Status - Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       font-family: Arial, sans-serif;
       background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
@@ -178,7 +180,7 @@
       return lines.slice(1).map(line => {
         const values = line.split(',').map(v => v.trim());
         const entry = {};
-        headers.forEach((header, i) => entry[header] = values[i] || '');
+        headers.forEach((header, i) => entry[header] = values[i] || "");
         return entry;
       });
     }
@@ -187,7 +189,8 @@
       if (!value || value.toLowerCase() === "no") {
         return `<span class="status-red">❌ No</span>`;
       }
-      if (["yes", "complete", "completed", "booked", "scheduled"].includes(value.toLowerCase())) {
+      const lowerVal = value.toLowerCase();
+      if (["yes", "complete", "completed", "booked", "scheduled", "done"].includes(lowerVal)) {
         return `<span class="status-green">✅ ${value}</span>`;
       }
       return `<span class="status-orange">⏳ ${value}</span>`;
@@ -198,12 +201,17 @@
       const resultDiv = document.getElementById("progress-result");
       resultDiv.innerHTML = "Loading...";
 
+      if (!login) {
+        resultDiv.innerHTML = `<p style="color:red;">Please enter your Client Number.</p>`;
+        return;
+      }
+
       try {
         const res = await fetch("https://raw.githubusercontent.com/Goglobal-Recruitment/Goglobal-Recruitment.github.io/main/fixed_data.csv");
         const text = await res.text();
         const data = parseCSV(text);
 
-        const client = data.find(entry => (entry["Client Number"] || '').toUpperCase() === login);
+        const client = data.find(entry => entry["Client Number"]?.toUpperCase() === login);
 
         if (client) {
           resultDiv.innerHTML = `
@@ -225,13 +233,4 @@
             </ul>
           `;
         } else {
-          resultDiv.innerHTML = `<p style="color:red;">Client number not found. Please check and try again.</p>`;
-        }
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = `<p style="color:red;">Failed to load progress. Try again later.</p>`;
-      }
-    }
-  </script>
-</body>
-</html>
+          resultDiv.innerHTML =
