@@ -30,7 +30,8 @@
     resultDiv.innerHTML = "Loading...";
 
     try {
-      const res = await fetch("data.csv");
+      // Make sure this matches the actual path to your CSV file in the repo
+      const res = await fetch("data.csv"); // or "data/data.csv" if in subfolder
       const text = await res.text();
       const data = parseCSV(text);
 
