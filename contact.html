@@ -43,12 +43,20 @@
       margin: 0 10px;
     }
     main {
-      background: rgba(255, 255, 255, 0.95);
       max-width: 600px;
       margin: 2rem auto;
+      padding: 1rem;
+    }
+    section {
+      background: #fff;
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    h2 {
+      text-align: center;
+      color: #003366;
     }
     label {
       display: block;
@@ -72,9 +80,6 @@
       cursor: pointer;
       font-size: 1rem;
       width: 100%;
-    }
-    section#client-tracker {
-      margin-bottom: 2rem;
     }
     #progress-result ul {
       list-style: none;
@@ -115,38 +120,43 @@
     </div>
   </nav>
 
-  <!-- TRACKER FIRST -->
   <main>
+
+    <!-- Block 1: Tracker -->
     <section id="client-tracker">
-      <h3 style="text-align: center;">Track Your Application</h3>
+      <h2>Track Your Application</h2>
       <input type="text" id="loginNumber" placeholder="Enter your Client Number (e.g. ESW001)" />
       <button onclick="checkProgress()">View Progress</button>
       <div id="progress-result" style="margin-top: 20px;"></div>
     </section>
 
-    <!-- CONTACT FORM SECOND -->
-    <form action="https://formspree.io/f/mvgrvbve" method="POST">
-      <label for="name">Full Name</label>
-      <input id="name" name="name" placeholder="John Doe" required type="text" />
+    <!-- Block 2: Contact Form -->
+    <section id="contact-form">
+      <h2>Contact Us</h2>
+      <form action="https://formspree.io/f/mvgrvbve" method="POST">
+        <label for="name">Full Name</label>
+        <input id="name" name="name" placeholder="John Doe" required type="text" />
 
-      <label for="email">Email Address</label>
-      <input id="email" name="email" placeholder="you@example.com" required type="email" />
+        <label for="email">Email Address</label>
+        <input id="email" name="email" placeholder="you@example.com" required type="email" />
 
-      <label for="message">Message (Optional)</label>
-      <textarea id="message" name="message" placeholder="Your message here..." rows="4"></textarea>
+        <label for="message">Message (Optional)</label>
+        <textarea id="message" name="message" placeholder="Your message here..." rows="4"></textarea>
 
-      <input name="_captcha" type="hidden" value="false" />
-      <input name="_next" type="hidden" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html" />
+        <input name="_captcha" type="hidden" value="false" />
+        <input name="_next" type="hidden" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html" />
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
   </main>
 
   <footer>
     © 2016 Go‑Global Recruitment. All rights reserved.
   </footer>
 
-  <!-- TRACKER SCRIPT -->
+  <!-- Tracker Script -->
   <script>
     function parseCSV(text) {
       const lines = text.trim().split('\n');
