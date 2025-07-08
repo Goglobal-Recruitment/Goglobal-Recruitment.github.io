@@ -139,9 +139,8 @@
   </nav>
 
   <main>
-    <!-- Grid: Form + Tracker -->
     <div class="grid">
-      <!-- Contact Form (Untouched) -->
+      <!-- Contact Form -->
       <form action="https://formspree.io/f/mvgrvbve" method="POST">
         <label for="name">Full Name</label>
         <input type="text" name="name" id="name" required placeholder="John Doe">
@@ -173,19 +172,17 @@
     &copy; 2016 Go‑Global Recruitment. All rights reserved.
   </footer>
 
-  <!-- Tracker Script -->
+  <!-- Script -->
   <script>
     function parseCSV(text) {
       const lines = text.trim().split('\n');
       const headers = lines[0].split(',').map(h => h.trim());
-      const entries = {};
-      for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(',').map(cell => cell.trim());
+      return lines.slice(1).map(line => {
+        const values = line.split(',').map(v => v.trim());
         const entry = {};
-        headers.forEach((h, j) => entry[h] = row[j]);
-        entries[row[0].toUpperCase()] = entry;
-      }
-      return entries;
+        headers.forEach((header, i) => entry[header] = values[i]);
+        return entry;
+      });
     }
 
     function formatStatus(value) {
@@ -205,15 +202,12 @@
 
       try {
         const res = await fetch("https://raw.githubusercontent.com/Goglobal-Recruitment/Goglobal-Recruitment.github.io/main/fixed_data.csv");
-const text = await res.text();
-const rows = text.trim().split("\n").slice(1);
-const data = rows.map(row => {
-  const [clientNumber, status] = row.split(",");
-  return { clientNumber: clientNumber.trim(), status: status.trim() };
-});
+        const text = await res.text();
+        const data = parseCSV(text);
 
-        if (data[login]) {
-          const client = data[login];
+        const client = data.find(entry => entry["Client Number"].toUpperCase() === login);
+
+        if (client) {
           resultDiv.innerHTML = `
             <h4>Status for ${login}</h4>
             <p><strong>Email:</strong> interviewsglo@outlook.com</p>
