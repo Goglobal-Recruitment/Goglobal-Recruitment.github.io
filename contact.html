@@ -205,8 +205,12 @@
 
       try {
         const res = await fetch("https://raw.githubusercontent.com/Goglobal-Recruitment/Goglobal-Recruitment.github.io/main/fixed_data.csv");
-        const text = await res.text();
-        const data = parseCSV(text);
+const text = await res.text();
+const rows = text.trim().split("\n").slice(1);
+const data = rows.map(row => {
+  const [clientNumber, status] = row.split(",");
+  return { clientNumber: clientNumber.trim(), status: status.trim() };
+});
 
         if (data[login]) {
           const client = data[login];
