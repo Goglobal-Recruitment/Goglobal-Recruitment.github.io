@@ -234,3 +234,72 @@
           `;
         } else {
           resultDiv.innerHTML =
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact & Track application Status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>/* (Your existing CSS) */</style>
+</head>
+<body>
+  <!-- (Your existing form + tracker layout) -->
+  <div id="progress-result"></div>
+  <script>
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(',').map(h => h.trim());
+      console.log('headers:', headers);
+      return lines.slice(1).map(line => {
+        const values = line.split(',').map(v => v.trim());
+        const entry = {};
+        headers.forEach((h, i) => entry[h] = values[i] || '');
+        return entry;
+      });
+    }
+
+    function formatStatus(value) {
+      if (!value || value.toLowerCase() === 'no') return `<span class="status-red">❌ No</span>`;
+      if (['yes','complete','booked','scheduled'].includes(value.toLowerCase())) return `<span class="status-green">✅ ${value}</span>`;
+      return `<span class="status-orange">⏳ ${value}</span>`;
+    }
+
+    async function checkProgress() {
+      const login = document.getElementById('loginNumber').value.trim().toUpperCase();
+      const resultDiv = document.getElementById('progress-result');
+      resultDiv.innerHTML = 'Loading...';
+      console.log('looking up:', login);
+
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/Goglobal-Recruitment/Goglobal-Recruitment.github.io/main/fixed_data.csv');
+        const text = await res.text();
+        const list = parseCSV(text);
+        console.log('parsed rows:', list.length);
+        list.forEach(row => console.log(row['Client Number']));
+
+        const client = list.find(x => (x['Client Number']||'').toUpperCase() === login);
+        console.log('found client:', client);
+
+        if (!login) {
+          resultDiv.innerHTML = `<p>Please enter a client number.</p>`;
+        } else if (client) {
+          resultDiv.innerHTML = `
+            <h4>Status for ${login}</h4>
+            <p><strong>Email:</strong> interviewsglo@outlook.com</p>
+            <ul>
+              <li>CV Uploaded: ${formatStatus(client['CV Uploaded'])}</li>
+              <li>Offer Letter: ${formatStatus(client['Offer Letter'])}</li>
+              <!-- add other statuses here -->
+            </ul>`;
+        } else {
+          resultDiv.innerHTML = `<p style="color:red;">Client number not found.</p>`;
+        }
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = `<p style="color:red;">Error loading progress.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
+
