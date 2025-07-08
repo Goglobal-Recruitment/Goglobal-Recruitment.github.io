@@ -1,0 +1,3 @@
+Client Number,Full Name,Email,CV Uploaded,Offer Letter,Go-Global Service Agreement,Employment Contract,Debtform/Schedule,Client Service booking,Biometrics Booking,Medical Booked,Psychologist Booking,Elites Test Booking,Hiring Company Meeting,Final Status
+CL001,Jane Doe,jane@example.com,Yes,Yes,Yes,Yes,Yes,Scheduled,Booked,Booked,Yes,Completed,Yes,Completed
+CL002,John Smith,john@example.com,No,Yes,No,Yes,No,,Booked,,No,,Scheduled,In Progress
