@@ -204,7 +204,7 @@
       resultDiv.innerHTML = "Loading...";
 
       try {
-        const res = await fetch("data.csv");
+        const res = await fetch("https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/fixed_data.csv");
         const text = await res.text();
         const data = parseCSV(text);
 
