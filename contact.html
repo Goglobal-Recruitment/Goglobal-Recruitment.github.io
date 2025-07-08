@@ -5,12 +5,11 @@
   <title>Contact Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Send your message securely to Go‑Global Recruitment. We’ll help you take the next step in your international career."/>
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f4f8fc;
       margin: 0;
       padding: 0;
@@ -18,50 +17,59 @@
       transition: opacity 0.6s ease-in;
       background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
     }
-    body.fade-in {
-      opacity: 1;
-    }
-    header {
+    body.fade-in { opacity: 1; }
+
+    header, footer {
       background-color: #003366;
       color: white;
-      padding: 1rem;
       text-align: center;
+      padding: 1rem;
     }
+
     nav {
       background-color: #003366;
       padding: 1rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
     }
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1.1em;
       margin: 0 10px;
+      font-size: 1.1em;
     }
+
     main {
-      max-width: 600px;
+      max-width: 1000px;
       margin: 2rem auto;
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
+
     section {
       background: #fff;
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
     }
+
+    section img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
     h2 {
-      text-align: center;
       color: #003366;
+      text-align: center;
+      margin-bottom: 1rem;
     }
-    label {
-      display: block;
-      margin-top: 1rem;
-    }
+
     input, textarea {
       width: 100%;
       padding: 10px;
@@ -70,34 +78,41 @@
       border: 1px solid #ccc;
       font-size: 1rem;
     }
+
+    label { margin-top: 1rem; display: block; }
+
     button {
       margin-top: 20px;
       background: #003366;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 1rem;
       width: 100%;
     }
+
     #progress-result ul {
       list-style: none;
       padding: 0;
     }
+
     #progress-result li {
       padding: 4px 0;
       border-bottom: 1px solid #eee;
     }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #003366;
-      color: white;
-      font-size: 0.9rem;
-      margin-top: 2rem;
+
+    input#loginNumber {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 10px; }
+      main { padding: 1rem; }
     }
   </style>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
@@ -107,11 +122,11 @@
 
 <body>
   <header>
-    <h1>Contact Us</h1>
+    <h1>Get in Touch with Go‑Global Recruitment</h1>
   </header>
 
   <nav>
-    <img alt="Go‑Global Logo" src="goglobal-logo-header.svg" style="height: 40px;" />
+    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;" />
     <div style="display: flex; flex-wrap: wrap; gap: 15px;">
       <a href="index.html">Home</a>
       <a href="expertise.html">Expertise</a>
@@ -121,18 +136,21 @@
   </nav>
 
   <main>
-
     <!-- Block 1: Tracker -->
     <section id="client-tracker">
+      <img src="https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=1000&q=80" alt="Application Tracker">
       <h2>Track Your Application</h2>
-      <input type="text" id="loginNumber" placeholder="Enter your Client Number (e.g. ESW001)" />
+      <p style="text-align:center;">Enter your Client Number to view your recruitment progress.</p>
+      <input type="text" id="loginNumber" placeholder="e.g. ESW001" />
       <button onclick="checkProgress()">View Progress</button>
       <div id="progress-result" style="margin-top: 20px;"></div>
     </section>
 
     <!-- Block 2: Contact Form -->
     <section id="contact-form">
+      <img src="https://images.unsplash.com/photo-1562072541-39f4e9197b2a?auto=format&fit=crop&w=1000&q=80" alt="Contact Us">
       <h2>Contact Us</h2>
+      <p style="text-align:center;">Have a question or need assistance? Send us a message.</p>
       <form action="https://formspree.io/f/mvgrvbve" method="POST">
         <label for="name">Full Name</label>
         <input id="name" name="name" placeholder="John Doe" required type="text" />
@@ -149,7 +167,6 @@
         <button type="submit">Submit</button>
       </form>
     </section>
-
   </main>
 
   <footer>
