@@ -1,133 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Contact Go‑Global Recruitment</title>
+  <meta charset="UTF-8" />
+  <title>Contact & Track application Status - Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Send your message securely to Go‑Global Recruitment. We’ll help you take the next step in your international career."/>
-
   <style>
     * { box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f8fc;
-      margin: 0;
-      padding: 0;
-      opacity: 0;
-      transition: opacity 0.6s ease-in;
+      font-family: Arial, sans-serif;
       background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
+      margin: 0; padding: 0; color: white;
     }
-    body.fade-in { opacity: 1; }
-
     header, footer {
-      background-color: #003366;
-      color: white;
-      text-align: center;
-      padding: 1rem;
+      background-color: rgba(0, 51, 102, 0.9);
+      color: white; padding: 1rem; text-align: center;
     }
-
     nav {
-      background-color: #003366;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+      background-color: rgba(0, 51, 102, 0.95);
+      padding: 1rem; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap;
     }
     nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 10px;
-      font-size: 1.1em;
+      color: white; text-decoration: none;
+      font-weight: bold; margin: 0 10px;
     }
-
     main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      max-width: 1000px; margin: 2rem auto;
+      padding: 2rem; background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px; backdrop-filter: blur(5px);
     }
-
-    section {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    }
-
-    section img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      color: #003366;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    input, textarea {
+    form, .tracker {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
     }
-
-    label { margin-top: 1rem; display: block; }
-
+    label {
+      display: block; margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%; padding: 10px;
+      margin-top: 5px; border-radius: 6px;
+      border: 1px solid #ccc; font-size: 1rem;
+    }
     button {
       margin-top: 20px;
-      background: #003366;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      cursor: pointer;
+      background: #003366; color: white;
+      border: none; padding: 10px 20px;
+      border-radius: 6px; cursor: pointer;
       font-size: 1rem;
-      width: 100%;
     }
-
+    .grid {
+      display: flex; flex-wrap: wrap;
+      gap: 2rem; margin-top: 2rem;
+    }
+    .grid > * { flex: 1 1 400px; }
+    .tracker {
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 1.5rem; border-radius: 10px;
+    }
     #progress-result ul {
-      list-style: none;
-      padding: 0;
+      list-style: none; padding: 0;
+      margin-top: 1rem;
     }
-
     #progress-result li {
-      padding: 4px 0;
-      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(255,255,255,0.2);
+      padding: 6px 0;
     }
-
-    input#loginNumber {
-      margin-top: 10px;
-    }
-
+    .status-red { color: #ff4d4d; }
+    .status-green { color: #33cc33; }
+    .status-orange { color: #ffcc00; }
     @media (max-width: 768px) {
-      nav { flex-direction: column; gap: 10px; }
-      main { padding: 1rem; }
+      nav { flex-direction: column; align-items: flex-start; }
+      nav img { margin-bottom: 1rem; }
     }
   </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.body.classList.add("fade-in");
-    });
-  </script>
 </head>
 
 <body>
   <header>
-    <h1>Get in Touch with Go‑Global Recruitment</h1>
+    <h1>Contact Us & Submit Your CV</h1>
   </header>
 
   <nav>
-    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;" />
-    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;">
+    <div>
       <a href="index.html">Home</a>
       <a href="expertise.html">Expertise</a>
       <a href="about.html">About</a>
@@ -136,95 +93,102 @@
   </nav>
 
   <main>
-    <!-- Block 1: Tracker -->
-    <section id="client-tracker">
-      <img src="https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=1000&q=80" alt="Application Tracker">
-      <h2>Track Your Application</h2>
-      <p style="text-align:center;">Enter your Client Number to view your recruitment progress.</p>
-      <input type="text" id="loginNumber" placeholder="e.g. ESW001" />
-      <button onclick="checkProgress()">View Progress</button>
-      <div id="progress-result" style="margin-top: 20px;"></div>
-    </section>
-
-    <!-- Block 2: Contact Form -->
-    <section id="contact-form">
-      <img src="https://images.unsplash.com/photo-1562072541-39f4e9197b2a?auto=format&fit=crop&w=1000&q=80" alt="Contact Us">
-      <h2>Contact Us</h2>
-      <p style="text-align:center;">Have a question or need assistance? Send us a message.</p>
+    <div class="grid">
+      <!-- Contact Form -->
       <form action="https://formspree.io/f/mvgrvbve" method="POST">
         <label for="name">Full Name</label>
-        <input id="name" name="name" placeholder="John Doe" required type="text" />
+        <input type="text" name="name" id="name" required placeholder="John Doe">
 
         <label for="email">Email Address</label>
-        <input id="email" name="email" placeholder="you@example.com" required type="email" />
+        <input type="email" name="email" id="email" required placeholder="you@example.com">
 
         <label for="message">Message (Optional)</label>
-        <textarea id="message" name="message" placeholder="Your message here..." rows="4"></textarea>
+        <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
 
-        <input name="_captcha" type="hidden" value="false" />
-        <input name="_next" type="hidden" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html" />
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
 
-        <button type="submit">Submit</button>
+        <button type="submit">Submit CV</button>
       </form>
-    </section>
+
+      <!-- Tracker -->
+      <div class="tracker">
+        <h2>Track Application</h2>
+        <label for="loginNumber">Enter Client Number (e.g. CL005)</label>
+        <input type="text" id="loginNumber" placeholder="CL005">
+        <button onclick="checkProgress()">Check Status</button>
+        <div id="progress-result"></div>
+      </div>
+    </div>
   </main>
 
   <footer>
-    © 2016 Go‑Global Recruitment. All rights reserved.
+    &copy; 2016 Go‑Global Recruitment. All rights reserved.
   </footer>
 
   <!-- Tracker Script -->
   <script>
     function parseCSV(text) {
-      const lines = text.trim().split('\n');
-      const headers = lines[0].split(',').map(h => h.trim());
-      const entries = {};
-
-      for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(',').map(cell => cell.trim());
+      const rows = text.trim().split('\n');
+      const cleanHeader = h => h.replace(/^\uFEFF/, '').trim();
+      const headers = rows[0].split(';').map(cleanHeader);
+      return rows.slice(1).map(line => {
+        const vals = line.split(';').map(v => v.trim());
         const entry = {};
-        headers.forEach((h, j) => entry[h] = row[j]);
-        entries[row[0]] = entry; // Use Client Number as key
-      }
-      return entries;
+        headers.forEach((h, i) => entry[h] = vals[i] || '');
+        return entry;
+      });
+    }
+
+    function formatStatus(val) {
+      if (!val || val.toLowerCase() === 'no') return '<span class="status-red">❌ No</span>';
+      const low = val.toLowerCase();
+      if (['yes', 'complete', 'completed', 'booked', 'scheduled'].includes(low))
+        return '<span class="status-green">✅ ' + val + '</span>';
+      return '<span class="status-orange">⏳ ' + val + '</span>';
     }
 
     async function checkProgress() {
-      const login = document.getElementById("loginNumber").value.trim().toUpperCase();
-      const resultDiv = document.getElementById("progress-result");
-      resultDiv.innerHTML = "Loading...";
+      const login = document.getElementById('loginNumber').value.trim().toUpperCase();
+      const resultDiv = document.getElementById('progress-result');
+      resultDiv.innerHTML = 'Loading...';
+
+      if (!login) {
+        resultDiv.innerHTML = '<p style="color:red;">Please enter a client number.</p>';
+        return;
+      }
 
       try {
-        const res = await fetch('data.csv');
-        const text = await res.text();
-        const data = parseCSV(text);
+        const res = await fetch('https://goglobal-recruitment.github.io/Go-Global-Recruitment/fixed_data.csv');
+        const txt = await res.text();
+        const data = parseCSV(txt);
+        const client = data.find(c => c['Client Number']?.trim().toUpperCase() === login);
 
-        if (data[login]) {
-          const client = data[login];
-          resultDiv.innerHTML = `
-            <h4>Status for ${client["Full Name"]}</h4>
-            <ul>
-              <li><strong>Email:</strong> ${client["Email"]}</li>
-              <li><strong>CV Uploaded:</strong> ${client["CV Uploaded"]}</li>
-              <li><strong>Offer Letter:</strong> ${client["Offer Letter"]}</li>
-              <li><strong>Service Agreement:</strong> ${client["Go-Global Service Agreement"]}</li>
-              <li><strong>Employment Contract:</strong> ${client["Employment Contract"]}</li>
-              <li><strong>Debtform/Schedule:</strong> ${client["Debtform/Schedule"]}</li>
-              <li><strong>Client Service Booking:</strong> ${client["Client Service booking"]}</li>
-              <li><strong>Biometrics Booking:</strong> ${client["Biometrics Booking"]}</li>
-              <li><strong>Medical Booked:</strong> ${client["Medical Booked"]}</li>
-              <li><strong>Psychologist Booking:</strong> ${client["Psychologist Booking"]}</li>
-              <li><strong>Elites Test Booking:</strong> ${client["Elites Test Booking"]}</li>
-              <li><strong>Hiring Meeting:</strong> ${client["Hiring Company Meeting"]}</li>
-              <li><strong>Final Status:</strong> <b>${client["Final Status"]}</b></li>
-            </ul>
-          `;
-        } else {
-          resultDiv.innerHTML = `<p style="color:red;">Client number not found. Please check and try again.</p>`;
+        if (!client) {
+          resultDiv.innerHTML = '<p style="color:red;">Client number not found. Please check and try again.</p>';
+          return;
         }
+
+        resultDiv.innerHTML = `
+          <h4>Status for ${login}</h4>
+          <p><strong>Email:</strong> interviewsglo@outlook.com</p>
+          <ul>
+            <li>CV Uploaded:<span>${formatStatus(client['CV Uploaded'])}</span></li>
+            <li>Offer Letter:<span>${formatStatus(client['Offer Letter'])}</span></li>
+            <li>Service Agreement:<span>${formatStatus(client['Go-Global Service Agreement'])}</span></li>
+            <li>Employment Contract:<span>${formatStatus(client['Employment Contract'])}</span></li>
+            <li>Debtform/Schedule:<span>${formatStatus(client['Debtform/Schedule'])}</span></li>
+            <li>Client Service Booking:<span>${formatStatus(client['Client Service booking'])}</span></li>
+            <li>Biometrics Booking:<span>${formatStatus(client['Biometrics Booking'])}</span></li>
+            <li>Medical Booked:<span>${formatStatus(client['Medical Booked'])}</span></li>
+            <li>Psychologist Booking:<span>${formatStatus(client['Psychologist Booking'])}</span></li>
+            <li>Elites Test Booking:<span>${formatStatus(client['Elites Test Booking'])}</span></li>
+            <li>Hiring Meeting:<span>${formatStatus(client['Hiring Company Meeting'])}</span></li>
+            <li><strong>Final Status:</strong><span>${formatStatus(client['Final Status'])}</span></li>
+          </ul>`;
       } catch (err) {
         console.error(err);
-        resultDiv.innerHTML = `<p style="color:red;">Failed to load progress. Try again later.</p>`;
+        resultDiv.innerHTML = '<p style="color:red;">Failed to load progress. Try again later.</p>';
       }
     }
   </script>
