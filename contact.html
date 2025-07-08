@@ -44,8 +44,7 @@
       backdrop-filter: blur(5px);
     }
     form {
-      max-width: 400px;
-      margin-bottom: 2rem;
+      width: 100%;
     }
     label {
       display: block;
@@ -72,12 +71,16 @@
     }
 
     .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
       margin-top: 2rem;
     }
-    .contact-info, .tracker {
+    .grid > * {
+      flex: 1 1 400px;
+    }
+
+    .tracker {
       background-color: rgba(255, 255, 255, 0.08);
       padding: 1.5rem;
       border-radius: 10px;
@@ -96,6 +99,7 @@
       padding: 0;
       margin-top: 1rem;
     }
+
     #progress-result li {
       display: flex;
       justify-content: space-between;
@@ -106,6 +110,16 @@
     .status-red { color: #ff4d4d; }
     .status-green { color: #33cc33; }
     .status-orange { color: #ffcc00; }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav img {
+        margin-bottom: 1rem;
+      }
+    }
   </style>
 </head>
 
@@ -125,33 +139,24 @@
   </nav>
 
   <main>
-    <!-- Contact Form (DO NOT TOUCH) -->
-    <form action="https://formspree.io/f/mvgrvbve" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" name="name" id="name" required placeholder="John Doe">
-
-      <label for="email">Email Address</label>
-      <input type="email" name="email" id="email" required placeholder="you@example.com">
-
-      <label for="message">Message (Optional)</label>
-      <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
-
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
-
-      <button type="submit">Submit CV</button>
-    </form>
-
-    <!-- Grid with Contact Info + Tracker -->
+    <!-- Grid: Form + Tracker -->
     <div class="grid">
-      <!-- Contact Info -->
-      <div class="contact-info">
-        <h2>Contact Information</h2>
-        <p><strong>Email:</strong> <a href="mailto:interviewsglo@outlook.com" style="color: #00d4ff;">interviewsglo@outlook.com</a></p>
-        <p><strong>Phone:</strong> +44 123 456 789</p>
-        <p><strong>Office Hours:</strong> Mon–Fri, 9am–5pm</p>
-        <p><strong>Location:</strong> London, UK</p>
-      </div>
+      <!-- Contact Form (Untouched) -->
+      <form action="https://formspree.io/f/mvgrvbve" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" required placeholder="John Doe">
+
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" required placeholder="you@example.com">
+
+        <label for="message">Message (Optional)</label>
+        <textarea name="message" id="message" rows="4" placeholder="Your message here..."></textarea>
+
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://goglobal-recruitment.github.io/Go-Global-Recruitment/thank-you.html">
+
+        <button type="submit">Submit CV</button>
+      </form>
 
       <!-- Tracker -->
       <div class="tracker">
@@ -207,7 +212,7 @@
           const client = data[login];
           resultDiv.innerHTML = `
             <h4>Status for ${login}</h4>
-            <p><strong>Email:</strong> ${client["Email"]}</p>
+            <p><strong>Email:</strong> interviewsglo@outlook.com</p>
             <ul>
               <li><span>CV Uploaded:</span><span>${formatStatus(client["CV Uploaded"])}</span></li>
               <li><span>Offer Letter:</span><span>${formatStatus(client["Offer Letter"])}</span></li>
