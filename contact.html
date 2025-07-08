@@ -118,13 +118,13 @@
 </body>
 </html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Client Tracker Section -->
-<section id="client-tracker">
-  <h3>Track Your Application</h3>
-  <input type="text" id="loginNumber" placeholder="Enter your Client Number (e.g. ESW001)" />
-  <button onclick="checkProgress()">View Progress</button>
-  <div id="progress-result" style="margin-top:20px;"></div>
+<section id="client-tracker" style="max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background: #f9f9f9;">
+  <h3 style="text-align: center;">Track Your Application</h3>
+  <input type="text" id="loginNumber" placeholder="Enter your Client Number (e.g. ESW001)" style="width: 100%; padding: 10px; margin-top: 10px;" />
+  <button onclick="checkProgress()" style="width: 100%; padding: 10px; margin-top: 10px;">View Progress</button>
+  <div id="progress-result" style="margin-top: 20px;"></div>
 </section>
+
 
 <script>
 // Function to fetch and parse CSV
