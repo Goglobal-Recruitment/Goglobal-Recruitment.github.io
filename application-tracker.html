@@ -1,99 +1,221 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Tracker | Go‑Global Recruitment</title>
+  <meta name="description" content="Track the status of your application with Go‑Global Recruitment in real time." />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f5f5f5;
-    }
-    nav {
-      background-color: #003366;
-      padding: 1rem;
-    }
-    nav ul {
-      list-style: none;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
+      box-sizing: border-box;
     }
-    nav a {
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fb;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+
+    body.fade-in {
+      opacity: 1;
+    }
+
+    header.site-header {
+      background-color: #003366;
       color: white;
-      font-weight: bold;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    nav.nav-container {
+      background-color: #003366;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      background-color: #004080;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s;
     }
-    nav a:hover {
-      background-color: #0059b3;
+
+    .nav-links a:hover {
+      color: #ffcc00;
     }
+
     .container {
-      padding: 2rem;
-      max-width: 100%;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      animation: fadeIn 0.5s ease-in;
       overflow-x: auto;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
+    .container::after {
+      content: "Swipe →";
+      font-size: 0.9rem;
+      color: #999;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      display: none;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #003366;
+      margin-bottom: 1rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1000px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
     }
+
     th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
+      padding: 1rem;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
-    th {
+
+    thead th {
       background-color: #003366;
       color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+
+    tr:hover {
+      background-color: #f1f1f1;
     }
+
+    .status-in-progress {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .status-completed {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .status-awaiting {
+      color: #2196f3;
+      font-weight: bold;
+    }
+
     @media (max-width: 768px) {
-      nav ul {
+      .nav-links {
         flex-direction: column;
         align-items: center;
       }
+
+      th, td {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
+  </script>
 </head>
 <body>
+  <!-- Shared Header -->
+  <header class="site-header fade-in">
+    <h1>Go‑Global Recruitment</h1>
+    <nav class="nav-container">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="expertise.html">Expertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="application-tracker.html">Track Application</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="expertise.html">Expertise</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="application-tracker.html">Track Application</a></li>
-  </ul>
-</nav>
+  <!-- Main Content -->
+  <div class="container">
+    <h2>Track Your Application</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Applicant Name</th>
+          <th>Position Applied</th>
+          <th>Date Submitted</th>
+          <th>Current Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>Software Developer</td>
+          <td>2025-06-10</td>
+          <td class="status-in-progress">In Progress</td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>UI/UX Designer</td>
+          <td>2025-06-08</td>
+          <td class="status-completed">Completed</td>
+        </tr>
+        <tr>
+          <td>Samuel Abebe</td>
+          <td>Project Manager</td>
+          <td>2025-06-12</td>
+          <td class="status-awaiting">Awaiting Review</td>
+        </tr>
+        <tr>
+          <td>Fatima Khalid</td>
+          <td>Data Analyst</td>
+          <td>2025-06-15</td>
+          <td class="status-in-progress">In Progress</td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
 
-<div class="container">
-  <h2>Application Status Tracker</h2>
-  <table>
-    <thead>
-      <tr>
-<th>Client Number</th><th>Full Name</th><th>Email</th><th>CV Uploaded</th><th>Offer Letter</th><th>Go-Global Service Agreement</th><th>Employment Contract</th><th>Debtform/Schedule</th><th>Client Service booking</th><th>Biometrics Booking</th><th>Medical Booked</th><th>Psychologist Booking</th><th>Elites Test Booking</th><th>Hiring Company Meeting</th><th>Final Status</th>
-      </tr>
-    </thead>
-    <tbody>
-<tr><td>CL001</td><td>Babhekile Mthembu</td><td>babhekileceliwem@gmail.com</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Scheduled</td><td>Booked</td><td>Booked</td><td>Yes</td><td>Completed</td><td>Yes</td><td>In Progress</td></tr><tr><td>CL002</td><td>Gcinumuzi Msibi</td><td>clubmsib@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL003</td><td>Lomakhosi Dlamini</td><td>lomakhosi.dlamini@pwc.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL004</td><td>lungelo sambo</td><td>prof.lmr.sambo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL005</td><td>Lungile Mbingo</td><td>suthugal@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL006</td><td>mandlenkhosi dlamini</td><td>amgflamini@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL007</td><td>Mfundo Dlamini </td><td>mfundod.95@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL008</td><td>Nana Sambo</td><td>nananonduduzo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL009</td><td>Nokulunga Dube</td><td>dubenokulunga4@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL010</td><td>Nomvula Dlamini</td><td>dlamininomvula1412@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL011</td><td>nondumiso bongwe</td><td>nondumisobongwe@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL012</td><td>Ntombie Mkhabela</td><td>mbutfom.72@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL013</td><td>Sibonelo Mdluli </td><td>bonelog2016@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL014</td><td>Silindile Maziya</td><td>maziyasilindile25@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL015</td><td>Skhangane Sokotshane</td><td>noel.zondo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL016</td><td>Zwakele Dlamini</td><td>zwakeledlamini55@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL017</td><td>Sakhile Hlatshwayo</td><td>sakhiyo@gmail.com  ,hr.manager@fashion.co.sz</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL018</td><td>Lama Langwenya</td><td>lamalangwenya@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL019</td><td>Lungile Maud Sihlongonyane</td><td>lungilemonjane87@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL020</td><td>Mbali Masilela-Langwenya</td><td>mbalilangwenya@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL021</td><td>Learnmore Sibanda</td><td>lenysibanda@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL022</td><td>Lwazi Makhanya</td><td>lwazimakhanya20@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL023</td><td>lora gada</td><td>loragada42@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr>
-    </tbody>
-  </table>
-</div>
-
+  <!-- Footer (optional) -->
+  <footer class="site-footer fade-in" style="text-align:center; padding: 1rem; background: #003366; color: white; margin-top: 2rem;">
+    &copy; 2016 Go‑Global Recruitment. All rights reserved.
+  </footer>
 </body>
 </html>
