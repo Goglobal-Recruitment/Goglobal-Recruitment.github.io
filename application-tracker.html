@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Track Application | Go‑Global Recruitment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Track your Go‑Global Recruitment application progress by client number.">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=80') no-repeat center center / cover;
+      color: #333;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in {
+      opacity: 1;
+    }
+    header, footer {
+      background-color: rgba(0, 51, 102, 0.95);
+      color: white;
+      text-align: center;
+      padding: 1.2rem;
+    }
+    nav {
+      background-color: rgba(0, 51, 102, 0.95);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      animation: slideUp 0.6s ease;
+    }
+    h2 {
+      color: #003366;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+    }
+    #statusOutput ul {
+      list-style: none;
+      padding: 0;
+    }
+    #statusOutput li {
+      padding: 8px 0;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+    .status-green { color: #2ecc71; font-weight: bold; }
+    .status-red { color: #e74c3c; font-weight: bold; }
+    .status-orange { color: #f39c12; font-weight: bold; }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 10px; }
+      main { margin: 1rem; padding: 1.5rem; }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      loadClientData();
+    });
+    async function loadClientData() {
+      const res = await fetch("cleaned_application_tracker.csv");
+      const text = await res.text();
+      const rows = text.trim().split("\n");
+      const headers = rows[0].split(",");
+      const clients = rows.slice(1).map(row => {
+        const cols = row.split(",");
+        const client = {};
+        headers.forEach((h, i) => client[h.trim()] = cols[i]?.trim() || '');
+        return client;
+      });
+      const dropdown = document.getElementById("clientDropdown");
+      clients.forEach(c => {
+        const option = document.createElement("option");
+        option.value = c["Client Application Number"];
+        option.textContent = `${c["Client Application Number"]} — ${c["Full Name"]}`;
+        dropdown.appendChild(option);
+      });
+      dropdown.addEventListener("change", () => {
+        const selected = dropdown.value;
+        const client = clients.find(c => c["Client Application Number"] === selected);
+        if (client) showStatus(client);
+        else document.getElementById("statusOutput").innerHTML = '';
+      });
+    }
+    function formatStatus(value) {
+      const val = value.toLowerCase();
+      if (["yes", "complete", "completed", "booked", "scheduled"].includes(val))
+        return `<span class="status-green">✅ ${value}</span>`;
+      if (["no", "rejected", "not booked"].includes(val))
+        return `<span class="status-red">❌ ${value}</span>`;
+      return `<span class="status-orange">⏳ ${value}</span>`;
+    }
+    function showStatus(client) {
+      const out = document.getElementById("statusOutput");
+      out.innerHTML = `
+        <h3>Status for ${client["Full Name"]}</h3>
+        <p><strong>Email:</strong> ${client["Email"]}</p>
+        <ul>
+          <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
+          <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
+          <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
+          <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
+          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
+          <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
+          <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
+          <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
+          <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
+          <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
+          <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
+          <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
+        </ul>`;
+    }
+  </script>
+</head>
+<body>
+  <header><h1>Track Your Application</h1></header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="application-tracker.html">Track Application</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <main>
+    <h2>Select Your Client Number</h2>
+    <select id="clientDropdown">
+      <option value="">-- Select Client Application Number --</option>
+    </select>
+    <div id="statusOutput"></div>
+  </main>
+  <footer>© 2016 Go‑Global Recruitment</footer>
+</body>
+</html>
