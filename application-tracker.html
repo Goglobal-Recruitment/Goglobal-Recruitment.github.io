@@ -52,13 +52,22 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    select {
+    input[type="text"] {
       width: 100%;
       padding: 12px;
       font-size: 1rem;
       border-radius: 6px;
       border: 1px solid #ccc;
       margin-bottom: 1rem;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      cursor: pointer;
     }
     #statusOutput ul {
       list-style: none;
@@ -87,35 +96,51 @@
     }
   </style>
   <script>
+    let clients = [];
+
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
       loadClientData();
     });
+
     async function loadClientData() {
       const res = await fetch("cleaned_application_tracker.csv");
       const text = await res.text();
       const rows = text.trim().split("\n");
       const headers = rows[0].split(",");
-      const clients = rows.slice(1).map(row => {
+      clients = rows.slice(1).map(row => {
         const cols = row.split(",");
         const client = {};
         headers.forEach((h, i) => client[h.trim()] = cols[i]?.trim() || '');
         return client;
       });
-      const dropdown = document.getElementById("clientDropdown");
-      clients.forEach(c => {
-        const option = document.createElement("option");
-        option.value = c["Client Application Number"];
-        option.textContent = `${c["Client Application Number"]} — ${c["Full Name"]}`;
-        dropdown.appendChild(option);
-      });
-      dropdown.addEventListener("change", () => {
-        const selected = dropdown.value;
-        const client = clients.find(c => c["Client Application Number"] === selected);
-        if (client) showStatus(client);
-        else document.getElementById("statusOutput").innerHTML = '';
-      });
     }
+
+    function searchClient() {
+      const input = document.getElementById("clientInput").value.trim();
+      const client = clients.find(c => c["Client Application Number"] === input);
+      const out = document.getElementById("statusOutput");
+      if (client) {
+        out.innerHTML = `
+          <ul>
+            <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
+            <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
+            <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
+            <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
+            <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
+            <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
+            <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
+            <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
+            <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
+            <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
+            <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
+            <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
+          </ul>`;
+      } else {
+        out.innerHTML = `<p style="color:red;">Client number not found.</p>`;
+      }
+    }
+
     function formatStatus(value) {
       const val = value.toLowerCase();
       if (["yes", "complete", "completed", "booked", "scheduled"].includes(val))
@@ -123,26 +148,6 @@
       if (["no", "rejected", "not booked"].includes(val))
         return `<span class="status-red">❌ ${value}</span>`;
       return `<span class="status-orange">⏳ ${value}</span>`;
-    }
-    function showStatus(client) {
-      const out = document.getElementById("statusOutput");
-      out.innerHTML = `
-        <h3>Status for ${client["Full Name"]}</h3>
-        <p><strong>Email:</strong> ${client["Email"]}</p>
-        <ul>
-          <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
-          <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
-          <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
-          <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
-          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
-          <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
-          <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
-          <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
-          <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
-          <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
-          <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
-          <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
-        </ul>`;
     }
   </script>
 </head>
@@ -156,10 +161,9 @@
     <a href="contact.html">Contact</a>
   </nav>
   <main>
-    <h2>Select Your Client Number</h2>
-    <select id="clientDropdown">
-      <option value="">-- Select Client Application Number --</option>
-    </select>
+    <h2>Enter Your Client Number</h2>
+    <input type="text" id="clientInput" placeholder="Enter your client application number" />
+    <button onclick="searchClient()">Check Status</button>
     <div id="statusOutput"></div>
   </main>
   <footer>© 2016 Go‑Global Recruitment</footer>
