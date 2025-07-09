@@ -3,473 +3,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Application Tracker - Go‑Global</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Tracker</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #003366, #005999);
-      color: #fff;
-      padding: 20px;
+      margin: 0;
+      background-color: #f5f5f5;
     }
-    h1 { text-align: center; margin-bottom: 30px; }
-    .tracker-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 700px;
-      margin: 0 auto;
+    nav {
+      background-color: #003366;
+      padding: 1rem;
     }
-    label, select, input, button {
-      display: block;
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: none;
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
     }
-    input, select { background: #fff; color: #000; }
-    button {
-      background: #007acc;
+    nav a {
       color: white;
       font-weight: bold;
-      cursor: pointer;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background-color: #004080;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
-    .status-results { margin-top: 20px; }
-    .status-results h2 { margin-bottom: 10px; }
-    .status-item {
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding: 10px 0;
+    nav a:hover {
+      background-color: #0059b3;
     }
-    .not-found {
-      color: #ff6666;
-      font-weight: bold;
-      text-align: center;
+    .container {
+      padding: 2rem;
+      max-width: 100%;
+      overflow-x: auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      color: #ccc;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1000px;
     }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.5rem; }
-      .tracker-box { padding: 15px; }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #003366;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Track Your Application</h1>
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="expertise.html">Expertise</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="application-tracker.html">Track Application</a></li>
+  </ul>
+</nav>
 
-  <div class="tracker-box">
-    <label for="clientNumber">Enter Client Number:</label>
-    <input type="text" id="clientNumber" placeholder="e.g. CL001">
-    <button onclick="trackStatus()">Check Status</button>
-    <div id="results" class="status-results"></div>
-  </div>
-
-  <footer>
-    &copy; 2025 Go‑Global Recruitment. All rights reserved.
-  </footer>
-
-  <script>
-    const data = {
-  "CL001": {
-    "Full Name": "Babhekile Mthembu",
-    "Email": "babhekileceliwem@gmail.com",
-    "CV Uploaded": "Yes",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "Yes",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "Yes",
-    "Client Service booking": "Scheduled",
-    "Biometrics Booking": "Booked",
-    "Medical Booked": "Booked",
-    "Psychologist Booking": "Yes",
-    "Elites Test Booking": "Completed",
-    "Hiring Company Meeting": "Yes",
-    "Final Status": "In Progress"
-  },
-  "CL002": {
-    "Full Name": "Gcinumuzi Msibi",
-    "Email": "clubmsib@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL003": {
-    "Full Name": "Lomakhosi Dlamini",
-    "Email": "lomakhosi.dlamini@pwc.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL004": {
-    "Full Name": "lungelo sambo",
-    "Email": "prof.lmr.sambo@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL005": {
-    "Full Name": "Lungile Mbingo",
-    "Email": "suthugal@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL006": {
-    "Full Name": "mandlenkhosi dlamini",
-    "Email": "amgflamini@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL007": {
-    "Full Name": "Mfundo Dlamini\u00a0",
-    "Email": "mfundod.95@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL008": {
-    "Full Name": "Nana Sambo",
-    "Email": "nananonduduzo@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL009": {
-    "Full Name": "Nokulunga Dube",
-    "Email": "dubenokulunga4@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL010": {
-    "Full Name": "Nomvula Dlamini",
-    "Email": "dlamininomvula1412@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL011": {
-    "Full Name": "nondumiso bongwe",
-    "Email": "nondumisobongwe@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL012": {
-    "Full Name": "Ntombie Mkhabela",
-    "Email": "mbutfom.72@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL013": {
-    "Full Name": "Sibonelo Mdluli\u00a0",
-    "Email": "bonelog2016@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL014": {
-    "Full Name": "Silindile Maziya",
-    "Email": "maziyasilindile25@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL015": {
-    "Full Name": "Skhangane Sokotshane",
-    "Email": "noel.zondo@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL016": {
-    "Full Name": "Zwakele Dlamini",
-    "Email": "zwakeledlamini55@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL017": {
-    "Full Name": "Sakhile Hlatshwayo",
-    "Email": "sakhiyo@gmail.com  ,hr.manager@fashion.co.sz",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL018": {
-    "Full Name": "Lama Langwenya",
-    "Email": "lamalangwenya@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL019": {
-    "Full Name": "Lungile Maud Sihlongonyane",
-    "Email": "lungilemonjane87@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL020": {
-    "Full Name": "Mbali Masilela-Langwenya",
-    "Email": "mbalilangwenya@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL021": {
-    "Full Name": "Learnmore Sibanda",
-    "Email": "lenysibanda@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL022": {
-    "Full Name": "Lwazi Makhanya",
-    "Email": "lwazimakhanya20@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  },
-  "CL023": {
-    "Full Name": "lora gada",
-    "Email": "loragada42@gmail.com",
-    "CV Uploaded": "No",
-    "Offer Letter": "Yes",
-    "Go-Global Service Agreement": "No",
-    "Employment Contract": "Yes",
-    "Debtform/Schedule": "No",
-    "Client Service booking": "No",
-    "Biometrics Booking": "No",
-    "Medical Booked": "No",
-    "Psychologist Booking": "No",
-    "Elites Test Booking": "No",
-    "Hiring Company Meeting": "No",
-    "Final Status": "In Progress"
-  }
-};
-
-    function trackStatus() {
-      const clientId = document.getElementById('clientNumber').value.trim().toUpperCase();
-      const resultDiv = document.getElementById('results');
-      resultDiv.innerHTML = "";
-
-      if (!data[clientId]) {
-        resultDiv.innerHTML = `<p class="not-found">Client number not found. Please check and try again.</p>`;
-        return;
-      }
-
-      const clientData = data[clientId];
-      let html = `<h2>Status for ${
-        fullName: clientData["Full Name"]
-      }.fullName</h2>`;
-
-      for (const key in clientData) {
-        if (key !== "Full Name" && key !== "Email") {
-          html += `<div class="status-item"><strong>${key}:</strong> ${clientData[key]}</div>`;
-        }
-      }
-
-      resultDiv.innerHTML = html;
-    }
-  </script>
+<div class="container">
+  <h2>Application Status Tracker</h2>
+  <table>
+    <thead>
+      <tr>
+<th>Client Number</th><th>Full Name</th><th>Email</th><th>CV Uploaded</th><th>Offer Letter</th><th>Go-Global Service Agreement</th><th>Employment Contract</th><th>Debtform/Schedule</th><th>Client Service booking</th><th>Biometrics Booking</th><th>Medical Booked</th><th>Psychologist Booking</th><th>Elites Test Booking</th><th>Hiring Company Meeting</th><th>Final Status</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td>CL001</td><td>Babhekile Mthembu</td><td>babhekileceliwem@gmail.com</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Scheduled</td><td>Booked</td><td>Booked</td><td>Yes</td><td>Completed</td><td>Yes</td><td>In Progress</td></tr><tr><td>CL002</td><td>Gcinumuzi Msibi</td><td>clubmsib@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL003</td><td>Lomakhosi Dlamini</td><td>lomakhosi.dlamini@pwc.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL004</td><td>lungelo sambo</td><td>prof.lmr.sambo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL005</td><td>Lungile Mbingo</td><td>suthugal@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL006</td><td>mandlenkhosi dlamini</td><td>amgflamini@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL007</td><td>Mfundo Dlamini </td><td>mfundod.95@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL008</td><td>Nana Sambo</td><td>nananonduduzo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL009</td><td>Nokulunga Dube</td><td>dubenokulunga4@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL010</td><td>Nomvula Dlamini</td><td>dlamininomvula1412@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL011</td><td>nondumiso bongwe</td><td>nondumisobongwe@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL012</td><td>Ntombie Mkhabela</td><td>mbutfom.72@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL013</td><td>Sibonelo Mdluli </td><td>bonelog2016@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL014</td><td>Silindile Maziya</td><td>maziyasilindile25@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL015</td><td>Skhangane Sokotshane</td><td>noel.zondo@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL016</td><td>Zwakele Dlamini</td><td>zwakeledlamini55@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL017</td><td>Sakhile Hlatshwayo</td><td>sakhiyo@gmail.com  ,hr.manager@fashion.co.sz</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL018</td><td>Lama Langwenya</td><td>lamalangwenya@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL019</td><td>Lungile Maud Sihlongonyane</td><td>lungilemonjane87@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL020</td><td>Mbali Masilela-Langwenya</td><td>mbalilangwenya@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL021</td><td>Learnmore Sibanda</td><td>lenysibanda@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL022</td><td>Lwazi Makhanya</td><td>lwazimakhanya20@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr><tr><td>CL023</td><td>lora gada</td><td>loragada42@gmail.com</td><td>No</td><td>Yes</td><td>No</td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>In Progress</td></tr>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>
