@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Application Tracker - Go‑Global</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #003366, #005999);
+      color: #fff;
+      padding: 20px;
+    }
+    h1 { text-align: center; margin-bottom: 30px; }
+    .tracker-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    label, select, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+    }
+    input, select { background: #fff; color: #000; }
+    button {
+      background: #007acc;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .status-results { margin-top: 20px; }
+    .status-results h2 { margin-bottom: 10px; }
+    .status-item {
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 0;
+    }
+    .not-found {
+      color: #ff6666;
+      font-weight: bold;
+      text-align: center;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #ccc;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      .tracker-box { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Track Your Application</h1>
+
+  <div class="tracker-box">
+    <label for="clientNumber">Enter Client Number:</label>
+    <input type="text" id="clientNumber" placeholder="e.g. CL001">
+    <button onclick="trackStatus()">Check Status</button>
+    <div id="results" class="status-results"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Go‑Global Recruitment. All rights reserved.
+  </footer>
+
+  <script>
+    const data = {
+  "CL001": {
+    "Full Name": "Babhekile Mthembu",
+    "Email": "babhekileceliwem@gmail.com",
+    "CV Uploaded": "Yes",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "Yes",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "Yes",
+    "Client Service booking": "Scheduled",
+    "Biometrics Booking": "Booked",
+    "Medical Booked": "Booked",
+    "Psychologist Booking": "Yes",
+    "Elites Test Booking": "Completed",
+    "Hiring Company Meeting": "Yes",
+    "Final Status": "In Progress"
+  },
+  "CL002": {
+    "Full Name": "Gcinumuzi Msibi",
+    "Email": "clubmsib@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL003": {
+    "Full Name": "Lomakhosi Dlamini",
+    "Email": "lomakhosi.dlamini@pwc.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL004": {
+    "Full Name": "lungelo sambo",
+    "Email": "prof.lmr.sambo@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL005": {
+    "Full Name": "Lungile Mbingo",
+    "Email": "suthugal@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL006": {
+    "Full Name": "mandlenkhosi dlamini",
+    "Email": "amgflamini@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL007": {
+    "Full Name": "Mfundo Dlamini\u00a0",
+    "Email": "mfundod.95@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL008": {
+    "Full Name": "Nana Sambo",
+    "Email": "nananonduduzo@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL009": {
+    "Full Name": "Nokulunga Dube",
+    "Email": "dubenokulunga4@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL010": {
+    "Full Name": "Nomvula Dlamini",
+    "Email": "dlamininomvula1412@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL011": {
+    "Full Name": "nondumiso bongwe",
+    "Email": "nondumisobongwe@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL012": {
+    "Full Name": "Ntombie Mkhabela",
+    "Email": "mbutfom.72@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL013": {
+    "Full Name": "Sibonelo Mdluli\u00a0",
+    "Email": "bonelog2016@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL014": {
+    "Full Name": "Silindile Maziya",
+    "Email": "maziyasilindile25@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL015": {
+    "Full Name": "Skhangane Sokotshane",
+    "Email": "noel.zondo@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL016": {
+    "Full Name": "Zwakele Dlamini",
+    "Email": "zwakeledlamini55@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL017": {
+    "Full Name": "Sakhile Hlatshwayo",
+    "Email": "sakhiyo@gmail.com  ,hr.manager@fashion.co.sz",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL018": {
+    "Full Name": "Lama Langwenya",
+    "Email": "lamalangwenya@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL019": {
+    "Full Name": "Lungile Maud Sihlongonyane",
+    "Email": "lungilemonjane87@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL020": {
+    "Full Name": "Mbali Masilela-Langwenya",
+    "Email": "mbalilangwenya@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL021": {
+    "Full Name": "Learnmore Sibanda",
+    "Email": "lenysibanda@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL022": {
+    "Full Name": "Lwazi Makhanya",
+    "Email": "lwazimakhanya20@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  },
+  "CL023": {
+    "Full Name": "lora gada",
+    "Email": "loragada42@gmail.com",
+    "CV Uploaded": "No",
+    "Offer Letter": "Yes",
+    "Go-Global Service Agreement": "No",
+    "Employment Contract": "Yes",
+    "Debtform/Schedule": "No",
+    "Client Service booking": "No",
+    "Biometrics Booking": "No",
+    "Medical Booked": "No",
+    "Psychologist Booking": "No",
+    "Elites Test Booking": "No",
+    "Hiring Company Meeting": "No",
+    "Final Status": "In Progress"
+  }
+};
+
+    function trackStatus() {
+      const clientId = document.getElementById('clientNumber').value.trim().toUpperCase();
+      const resultDiv = document.getElementById('results');
+      resultDiv.innerHTML = "";
+
+      if (!data[clientId]) {
+        resultDiv.innerHTML = `<p class="not-found">Client number not found. Please check and try again.</p>`;
+        return;
+      }
+
+      const clientData = data[clientId];
+      let html = `<h2>Status for ${
+        fullName: clientData["Full Name"]
+      }.fullName</h2>`;
+
+      for (const key in clientData) {
+        if (key !== "Full Name" && key !== "Email") {
+          html += `<div class="status-item"><strong>${key}:</strong> ${clientData[key]}</div>`;
+        }
+      }
+
+      resultDiv.innerHTML = html;
+    }
+  </script>
+
+</body>
+</html>
