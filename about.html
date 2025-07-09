@@ -19,19 +19,29 @@
 
     header {
       background-color: #003366;
-      padding: 1rem;
+      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
     }
-    header img {
+    .logo {
       height: 50px;
     }
-    header h1 {
+
+    .banner {
+      background-color: #0047AB;
       color: white;
-      font-size: 1.6em;
-      margin: 0;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 1.8em;
+      font-weight: bold;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     nav {
@@ -64,15 +74,14 @@
       margin-bottom: 2rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
+
     .flag {
       width: 20px;
       height: 15px;
       vertical-align: middle;
       margin-left: 6px;
     }
-    .team-member p {
-      margin: 10px 0;
-    }
+
     .section-title {
       color: #003366;
       font-size: 1.6em;
@@ -89,9 +98,29 @@
     @media (max-width: 768px) {
       header {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        padding: 1rem;
       }
+      .banner {
+        font-size: 1.4em;
+        padding: 1rem;
+      }
+    }
+
+    /* Optional: spinning globe */
+    .globe {
+      width: 60px;
+      height: 60px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ef/Rotating_earth_%28large%29.gif');
+      background-size: cover;
+      border-radius: 50%;
+      animation: spin 10s linear infinite;
+      margin: 1rem auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 
@@ -104,9 +133,10 @@
 
 <body>
   <header>
-    <img src="goglobal-logo-header.svg" alt="Go-Global Logo" />
-    <h1>About Go‑Global Recruitment</h1>
+    <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="logo" />
   </header>
+
+  <div class="banner">About Go‑Global Recruitment</div>
 
   <nav>
     <a href="index.html">Home</a>
@@ -117,6 +147,8 @@
   </nav>
 
   <div class="container">
+    <div class="globe"></div>
+
     <div class="section">
       <h2>Empowering Talent. Enabling Journeys.</h2>
       <p>We believe that a good efficient team work makes the dream work. Our mission is to create a world where people have access to the right opportunities to thrive. We are passionate experts in helping companies find and hire the best talent.</p>
