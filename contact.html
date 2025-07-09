@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact & Track application Status - Go‑Global Recruitment</title>
+  <title>Contact Us - Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     * { box-sizing: border-box; }
@@ -79,7 +79,7 @@
 
 <body>
   <header>
-    <h1>Contact Us & Application Tracker</h1>
+    <h1>Contact Us </h1>
   </header>
 
   <nav>
@@ -111,86 +111,7 @@
         <button type="submit">Submit</button>
       </form>
 
-      <!-- Tracker -->
-      <div class="tracker">
-        <h2>Track Application</h2>
-        <label for="loginNumber">Enter Client Number (e.g. CL005)</label>
-        <input type="text" id="loginNumber" placeholder="CL005">
-        <button onclick="checkProgress()">Check Status</button>
-        <div id="progress-result"></div>
-      </div>
-    </div>
-  </main>
-
+      
   <footer>
     &copy; 2016 Go‑Global Recruitment. All rights reserved.
   </footer>
-
-  <!-- Tracker Script -->
-  <script>
-    function parseCSV(text) {
-      const rows = text.trim().split('\n');
-      const cleanHeader = h => h.replace(/^\uFEFF/, '').trim();
-      const headers = rows[0].split(';').map(cleanHeader);
-      return rows.slice(1).map(line => {
-        const vals = line.split(';').map(v => v.trim());
-        const entry = {};
-        headers.forEach((h, i) => entry[h] = vals[i] || '');
-        return entry;
-      });
-    }
-
-    function formatStatus(val) {
-      if (!val || val.toLowerCase() === 'no') return '<span class="status-red">❌ No</span>';
-      const low = val.toLowerCase();
-      if (['yes', 'complete', 'completed', 'booked', 'scheduled'].includes(low))
-        return '<span class="status-green">✅ ' + val + '</span>';
-      return '<span class="status-orange">⏳ ' + val + '</span>';
-    }
-
-    async function checkProgress() {
-      const login = document.getElementById('loginNumber').value.trim().toUpperCase();
-      const resultDiv = document.getElementById('progress-result');
-      resultDiv.innerHTML = 'Loading...';
-
-      if (!login) {
-        resultDiv.innerHTML = '<p style="color:red;">Please enter a client number.</p>';
-        return;
-      }
-
-      try {
-       const res = await fetch('https://goglobal-recruitment.github.io/Go-Global-Recruitment/cleaned_application_status.csv');
-        const txt = await res.text();
-        const data = parseCSV(txt);
-        const client = data.find(c => c['Client Number']?.trim().toUpperCase() === login);
-
-        if (!client) {
-          resultDiv.innerHTML = '<p style="color:red;">Client number not found. Please check and try again.</p>';
-          return;
-        }
-
-        resultDiv.innerHTML = `
-          <h4>Status for ${login}</h4>
-          <p><strong>Email:</strong> interviewsglo@outlook.com</p>
-          <ul>
-            <li>CV Uploaded:<span>${formatStatus(client['CV Uploaded'])}</span></li>
-            <li>Offer Letter:<span>${formatStatus(client['Offer Letter'])}</span></li>
-            <li>Service Agreement:<span>${formatStatus(client['Go-Global Service Agreement'])}</span></li>
-            <li>Employment Contract:<span>${formatStatus(client['Employment Contract'])}</span></li>
-            <li>Debtform/Schedule:<span>${formatStatus(client['Debtform/Schedule'])}</span></li>
-            <li>Client Service Booking:<span>${formatStatus(client['Client Service booking'])}</span></li>
-            <li>Biometrics Booking:<span>${formatStatus(client['Biometrics Booking'])}</span></li>
-            <li>Medical Booked:<span>${formatStatus(client['Medical Booked'])}</span></li>
-            <li>Psychologist Booking:<span>${formatStatus(client['Psychologist Booking'])}</span></li>
-            <li>Elites Test Booking:<span>${formatStatus(client['Elites Test Booking'])}</span></li>
-            <li>Hiring Meeting:<span>${formatStatus(client['Hiring Company Meeting'])}</span></li>
-            <li><strong>Final Status:</strong><span>${formatStatus(client['Final Status'])}</span></li>
-          </ul>`;
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = '<p style="color:red;">Failed to load progress. Try again later.</p>';
-      }
-    }
-  </script>
-</body>
-</html>
