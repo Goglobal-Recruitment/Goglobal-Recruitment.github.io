@@ -17,12 +17,53 @@
     }
     body.fade-in { opacity: 1; }
 
-    header {
+    .site-header {
+      background-color: white;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-link {
+      display: inline-block;
+    }
+
+    .site-logo {
+      height: 50px;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #003366;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: #0077cc;
+    }
+
+    header.hero {
       background: url('https://images.unsplash.com/photo-1573164574396-9d5f46c3d1c9?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover;
       height: 400px;
     }
 
-    header .overlay {
+    header.hero .overlay {
       background: rgba(0,0,0,0.6);
       height: 100%;
       display: flex;
@@ -34,34 +75,14 @@
       padding: 0 20px;
     }
 
-    header h1 {
+    header.hero h1 {
       font-size: 3em;
       margin: 0;
     }
 
-    header p {
+    header.hero p {
       font-size: 1.2em;
       margin-top: 10px;
-    }
-
-    nav {
-      background-color: #003366;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 1rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
     }
 
     .section {
@@ -115,9 +136,14 @@
         align-items: center;
       }
 
-      nav {
+      .nav-menu {
         flex-direction: column;
         gap: 10px;
+      }
+
+      .container {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -160,20 +186,27 @@
 </head>
 
 <body>
-  <header>
+  <div class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo-link">
+        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo">
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="expertise.html">Expertise</a>
+        <a href="application-tracker.html">Track Application</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
     <div class="overlay">
       <h1>Go‑Global Recruitment</h1>
       <p>Empowering Talent. Enabling Journeys.</p>
     </div>
   </header>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="expertise.html">Expertise</a>
-    <a href="application-tracker.html">Track Application</a>
-    <a href="contact.html">Contact</a>
-  </nav>
 
   <div class="section">
     <h2>Why Choose Go‑Global?</h2>
