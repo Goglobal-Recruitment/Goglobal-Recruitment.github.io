@@ -159,7 +159,8 @@
       }
 
       try {
-        const res = await fetch('https://goglobal-recruitment.github.io/Go-Global-Recruitment/fixed_data.csv');
+        const res = await fetch('https://goglobal-recruitment.github.io/Go-Global-Recruitment/cleaned_application_status.csv');
+
         const txt = await res.text();
         const data = parseCSV(txt);
         const client = data.find(c => c['Client Number']?.trim().toUpperCase() === login);
