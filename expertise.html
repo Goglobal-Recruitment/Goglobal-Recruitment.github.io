@@ -36,21 +36,52 @@
     nav {
       background-color: #003366;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 2rem;
-      padding: 1rem;
+      padding: 1rem 2rem;
     }
 
-    nav a {
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-left img {
+      height: 40px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
     }
 
     .container {
@@ -95,14 +126,20 @@
   </header>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="expertise.html">Expertise</a>
-    <a href="application-tracker.html">Track Application</a>
-    <a href="contact.html">Contact</a>
+    <div class="nav-left">
+      <img src="goglobal-logo-header.svg" alt="Go-Global Logo" />
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="expertise.html">Expertise</a>
+      <a href="application-tracker.html">Track Application</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </nav>
 
   <div class="container">
+    <!-- Your section content remains unchanged -->
     <div class="section">
       <h2>✈️ Flight Crew Recruitment</h2>
       <p>We specialize in sourcing highly qualified aviation professionals, including Captains, First Officers, and Cabin Crew, for global commercial and private airlines...</p>
