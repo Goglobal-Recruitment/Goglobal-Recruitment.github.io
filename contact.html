@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<header class="site-header fade-in">
-  <nav class="nav-container">
-    <div class="logo">Go‑Global</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="expertise.html">Expertise</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="application-tracker.html">Track Application</a></li>
-    </ul>
-  </nav>
-</header>
-
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact Us - Go‑Global Recruitment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Go‑Global Recruitment</title>
+  <meta name="description" content="Get in touch with Go‑Global Recruitment for inquiries, support, and more." />
+
   <style>
     * { box-sizing: border-box; }
     html, body {
-      margin: 0; padding: 0;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
       height: 100%;
     }
@@ -31,28 +20,47 @@
       background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1350&q=80') no-repeat center center / cover;
       display: flex;
       flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
     }
 
-    header, footer {
-      background-color: rgba(0, 51, 102, 0.9);
+    body.fade-in {
+      opacity: 1;
+    }
+
+    header.site-header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem 0;
       text-align: center;
-      padding: 1rem;
     }
 
-    nav {
-      background-color: rgba(0, 51, 102, 0.95);
-      padding: 1rem;
+    nav.nav-container {
+      background-color: #003366;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
       flex-wrap: wrap;
     }
 
-    nav a {
+    .nav-links a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      margin: 0 10px;
+      font-size: 1.1em;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffcc00;
     }
 
     main {
@@ -105,32 +113,49 @@
       font-size: 1rem;
     }
 
+    footer {
+      background-color: #003366;
+      text-align: center;
+      padding: 1rem;
+      color: white;
+    }
+
     @media (max-width: 768px) {
-      nav { flex-direction: column; align-items: flex-start; }
-      nav img { margin-bottom: 1rem; }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+      }
+      input, textarea {
+        font-size: 0.9rem;
+      }
     }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+    });
+  </script>
 </head>
 
 <body>
-
-  <header>
-    <h1>Contact Us</h1>
+  <!-- Shared Header -->
+  <header class="site-header fade-in">
+    <h1>Go‑Global Recruitment</h1>
+    <nav class="nav-container">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="expertise.html">Expertise</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="application-tracker.html">Track Application</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <nav>
-    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" style="height: 40px;">
-    <div>
-      <a href="index.html">Home</a>
-      <a href="expertise.html">Expertise</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-
+  <!-- Main Contact Content -->
   <main>
     <div class="container">
-      <!-- Contact Form -->
       <form action="https://formspree.io/f/mvgrvbve" method="POST">
         <label for="name">Full Name</label>
         <input type="text" name="name" id="name" required placeholder="John Doe">
@@ -150,8 +175,7 @@
   </main>
 
   <footer>
-    &copy; 2016 Go‑Global Recruitment. All rights reserved.
+    &copy; 2021 Go‑Global Recruitment. All rights reserved.
   </footer>
-
 </body>
 </html>
