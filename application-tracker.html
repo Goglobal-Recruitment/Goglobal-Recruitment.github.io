@@ -16,12 +16,14 @@
       transition: opacity 0.6s ease-in;
     }
     body.fade-in { opacity: 1; }
+
     header, footer {
       background-color: rgba(0, 51, 102, 0.95);
       color: white;
       text-align: center;
       padding: 1.2rem;
     }
+
     nav {
       background-color: rgba(0, 51, 102, 0.95);
       display: flex;
@@ -30,12 +32,14 @@
       flex-wrap: wrap;
       padding: 1rem;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
     }
+
     main {
       max-width: 900px;
       margin: 2rem auto;
@@ -45,12 +49,14 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       animation: slideUp 0.6s ease;
     }
+
     h2 {
       color: #003366;
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    input[list], select {
+
+    input[type="text"] {
       width: 100%;
       padding: 12px;
       font-size: 1rem;
@@ -58,6 +64,7 @@
       border: 1px solid #ccc;
       margin-bottom: 1rem;
     }
+
     button {
       padding: 10px 20px;
       font-size: 1rem;
@@ -66,61 +73,58 @@
       color: white;
       border: none;
       cursor: pointer;
-      margin-right: 10px;
     }
+
     #statusOutput ul {
       list-style: none;
       padding: 0;
     }
+
     #statusOutput li {
       padding: 8px 0;
       border-bottom: 1px solid #ccc;
       display: flex;
       justify-content: space-between;
     }
-    .status-green {
-      color: #2ecc71;
-      font-weight: bold;
-      animation: fadeIn 1s ease-in-out;
-    }
-    .status-red {
-      color: #e74c3c;
-      font-weight: bold;
-      animation: shake 0.5s;
-    }
-    .status-orange {
-      color: #f39c12;
-      font-weight: bold;
-      animation: pulse 1.5s infinite;
-    }
+
+    .status-green { color: #2ecc71; font-weight: bold; animation: fadeIn 1s ease-in-out; }
+    .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
+    .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
+
     footer {
       margin-top: 2rem;
       font-size: 0.95rem;
     }
+
     @keyframes slideUp {
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-5px); }
       50% { transform: translateX(5px); }
       75% { transform: translateX(-5px); }
     }
+
     @media (max-width: 768px) {
       nav { flex-direction: column; gap: 10px; }
       main { margin: 1rem; padding: 1.5rem; }
     }
   </style>
+
   <script>
     let clients = [];
 
@@ -132,20 +136,13 @@
     async function loadClientData() {
       const res = await fetch("cleaned_application_tracker.csv");
       const text = await res.text();
-      const rows = text.trim().split("\\n");
+      const rows = text.trim().split("\n");
       const headers = rows[0].split(",");
       clients = rows.slice(1).map(row => {
         const cols = row.split(",");
         const client = {};
         headers.forEach((h, i) => client[h.trim()] = cols[i]?.trim() || '');
         return client;
-      });
-
-      const dropdown = document.getElementById("clientDropdown");
-      clients.forEach(c => {
-        const opt = document.createElement("option");
-        opt.value = c["Client Application Number"];
-        dropdown.appendChild(opt);
       });
     }
 
@@ -154,23 +151,20 @@
       const client = clients.find(c => c["Client Application Number"] === input);
       const out = document.getElementById("statusOutput");
       if (client) {
-        const html = `
-          <ul>
-            <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
-            <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
-            <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
-            <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
-            <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
-            <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
-            <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
-            <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
-            <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
-            <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
-            <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
-            <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
-          </ul>`;
-        out.innerHTML = html;
-        window.statusHTML = html;
+        out.innerHTML = `<ul>
+          <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
+          <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
+          <li>Service Agreement:<span>${formatStatus(client["Go-Global Service Agreement"])}</span></li>
+          <li>Employment Contract:<span>${formatStatus(client["Employment Contract"])}</span></li>
+          <li>Debtform/Schedule:<span>${formatStatus(client["Debtform/Schedule"])}</span></li>
+          <li>Client Service Booking:<span>${formatStatus(client["Client Service booking"])}</span></li>
+          <li>Biometrics Booking:<span>${formatStatus(client["Biometrics Booking"])}</span></li>
+          <li>Medical Booked:<span>${formatStatus(client["Medical Booked"])}</span></li>
+          <li>Psychologist Booking:<span>${formatStatus(client["Psychologist Booking"])}</span></li>
+          <li>Elites Test Booking:<span>${formatStatus(client["Elites Test Booking"])}</span></li>
+          <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
+          <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
+        </ul>`;
       } else {
         out.innerHTML = `<p style="color:red; animation: shake 0.5s;">Client number not found.</p>`;
       }
@@ -178,27 +172,18 @@
 
     function formatStatus(value) {
       const val = value.toLowerCase();
-      if (["yes", "accepted", "signed", "completed", "booked", "scheduled"].includes(val))
-        return `<span class="status-green">✅ ${value}</span>`;
-      if (["no", "rejected", "not booked", "incomplete"].includes(val))
-        return `<span class="status-red">❌ ${value}</span>`;
-      if (["pending", "in progress", "awaiting signed contract"].includes(val))
-        return `<span class="status-orange">⏳ ${value}</span>`;
-      return `<span>${value}</span>`;
-    }
+      const green = ["yes", "accepted", "booked", "completed", "signed", "scheduled"];
+      const orange = ["pending", "awaiting signed contract", "in progress"];
+      const red = ["no", "rejected", "not booked", "incomplete"];
 
-    function exportToPDF() {
-      const content = document.getElementById("statusOutput").innerHTML;
-      const win = window.open('', '', 'width=800,height=600');
-      win.document.write('<html><head><title>Application Status</title></head><body>');
-      win.document.write('<h2>Application Status</h2>');
-      win.document.write(content);
-      win.document.write('</body></html>');
-      win.document.close();
-      win.print();
+      if (green.includes(val)) return `<span class="status-green">✅ ${value}</span>`;
+      if (red.includes(val)) return `<span class="status-red">❌ ${value}</span>`;
+      if (orange.includes(val)) return `<span class="status-orange">⏳ ${value}</span>`;
+      return `<span>${value}</span>`;
     }
   </script>
 </head>
+
 <body>
   <header><h1>Track Your Application</h1></header>
   <nav>
@@ -210,10 +195,8 @@
   </nav>
   <main>
     <h2>Enter Your Client Number</h2>
-    <input list="clientDropdown" id="clientInput" placeholder="Enter or select your client application number" />
-    <datalist id="clientDropdown"></datalist>
+    <input type="text" id="clientInput" placeholder="Enter your client application number" />
     <button onclick="searchClient()">Check Status</button>
-    <button onclick="exportToPDF()">Export to PDF</button>
     <div id="statusOutput"></div>
   </main>
   <footer>© 2016 Go‑Global Recruitment</footer>
