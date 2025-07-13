@@ -118,7 +118,7 @@
     });
 
     async function loadClientData() {
-      const res = await fetch("cleaned_application_tracker.csv");
+      const res = await fetch("cleaned_application_tracker.csv")
       const text = await res.text();
       const rows = text.trim().split("\n");
       const headers = rows[0].split(",");
