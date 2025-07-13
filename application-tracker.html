@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Track your Go‑Global Recruitment application progress by client number.">
   <style>
-    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -16,26 +15,30 @@
       transition: opacity 0.6s ease-in;
     }
     body.fade-in { opacity: 1; }
+
     header, footer {
       background-color: rgba(0, 51, 102, 0.95);
       color: white;
       text-align: center;
       padding: 1.2rem;
     }
+
     nav {
-      background-color: rgba(0, 51, 102, 0.95);
       display: flex;
       justify-content: center;
       gap: 2rem;
       flex-wrap: wrap;
       padding: 1rem;
+      background-color: rgba(0, 51, 102, 0.95);
     }
+
     nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.1em;
     }
+
     main {
       max-width: 900px;
       margin: 2rem auto;
@@ -45,67 +48,75 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.2);
       animation: slideUp 0.6s ease;
     }
+
     h2 {
       color: #003366;
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    input[type="text"] {
+
+    input[type="text"], button {
       width: 100%;
       padding: 12px;
       font-size: 1rem;
       border-radius: 6px;
-      border: 1px solid #ccc;
       margin-bottom: 1rem;
     }
+
+    input[type="text"] {
+      border: 1px solid #ccc;
+    }
+
     button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 6px;
       background-color: #003366;
       color: white;
       border: none;
       cursor: pointer;
     }
+
     #statusOutput ul {
       list-style: none;
       padding: 0;
     }
+
     #statusOutput li {
       padding: 8px 0;
       border-bottom: 1px solid #ccc;
       display: flex;
       justify-content: space-between;
     }
+
     .status-green { color: #2ecc71; font-weight: bold; animation: fadeIn 1s ease-in-out; }
-    .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
     .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-    }
+    .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
+    .status-hold { color: #9b59b6; font-weight: bold; animation: pulse 1.5s infinite; }
+
     @keyframes slideUp {
       from { transform: translateY(20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-5px); }
       50% { transform: translateX(5px); }
       75% { transform: translateX(-5px); }
     }
-    @media (max-width: 768px) {
-      nav { flex-direction: column; gap: 10px; }
-      main { margin: 1rem; padding: 1.5rem; }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.95rem;
     }
   </style>
 
@@ -118,10 +129,11 @@
     });
 
     async function loadClientData() {
-      const res = await fetch("cleaned_application_tracker.csv")
+      const res = await fetch("cleaned_application_tracker.csv");
       const text = await res.text();
       const rows = text.trim().split("\n");
       const headers = rows[0].split(",");
+
       clients = rows.slice(1).map(row => {
         const cols = row.split(",");
         const client = {};
@@ -132,8 +144,9 @@
 
     function searchClient() {
       const input = document.getElementById("clientInput").value.trim().toLowerCase();
-      const client = clients.find(c => c["Client Application Number"].trim().toLowerCase() === input);
+      const client = clients.find(c => c["Client Application Number"]?.trim().toLowerCase() === input);
       const out = document.getElementById("statusOutput");
+
       if (client) {
         out.innerHTML = `<ul>
           <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
@@ -160,15 +173,16 @@
       const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
       const orange = ["pending", "awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete"];
+      const hold = ["on hold", "paused"];
 
       if (green.includes(val)) return `<span class="status-green">✅ ${value}</span>`;
       if (red.includes(val)) return `<span class="status-red">❌ ${value}</span>`;
+      if (hold.includes(val)) return `<span class="status-hold">⏸️ ${value}</span>`;
       if (orange.includes(val)) return `<span class="status-orange">⏳ ${value}</span>`;
       return `<span>${value}</span>`;
     }
   </script>
 </head>
-
 <body>
   <header><h1>Track Your Application</h1></header>
   <nav>
