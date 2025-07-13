@@ -172,9 +172,9 @@
       const val = value.toLowerCase();
       if (["yes", "accepted", "signed", "completed", "booked", "scheduled"].includes(val))
         return `<span class="status-green">✅ ${value}</span>`;
-      if (["no", "rejected", "not booked"].includes(val))
+      if (["no", "rejected", "not booked", "incomplete"].includes(val))
         return `<span class="status-red">❌ ${value}</span>`;
-      if (["pending", "incomplete", "in progress"].includes(val))
+      if (["pending", "in progress"].includes(val))
         return `<span class="status-orange">⏳ ${value}</span>`;
       return `<span>${value}</span>`;
     }
