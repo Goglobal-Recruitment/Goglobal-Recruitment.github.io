@@ -15,9 +15,7 @@
       opacity: 0;
       transition: opacity 0.6s ease-in;
     }
-    body.fade-in {
-      opacity: 1;
-    }
+    body.fade-in { opacity: 1; }
     header, footer {
       background-color: rgba(0, 51, 102, 0.95);
       color: white;
@@ -52,7 +50,7 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    input[type="text"] {
+    input[list], select {
       width: 100%;
       padding: 12px;
       font-size: 1rem;
@@ -68,6 +66,7 @@
       color: white;
       border: none;
       cursor: pointer;
+      margin-right: 10px;
     }
     #statusOutput ul {
       list-style: none;
@@ -133,13 +132,20 @@
     async function loadClientData() {
       const res = await fetch("cleaned_application_tracker.csv");
       const text = await res.text();
-      const rows = text.trim().split("\n");
+      const rows = text.trim().split("\\n");
       const headers = rows[0].split(",");
       clients = rows.slice(1).map(row => {
         const cols = row.split(",");
         const client = {};
         headers.forEach((h, i) => client[h.trim()] = cols[i]?.trim() || '');
         return client;
+      });
+
+      const dropdown = document.getElementById("clientDropdown");
+      clients.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c["Client Application Number"];
+        dropdown.appendChild(opt);
       });
     }
 
@@ -148,7 +154,7 @@
       const client = clients.find(c => c["Client Application Number"] === input);
       const out = document.getElementById("statusOutput");
       if (client) {
-        out.innerHTML = `
+        const html = `
           <ul>
             <li>CV Uploaded:<span>${formatStatus(client["CV Uploaded"])}</span></li>
             <li>Offer Letter:<span>${formatStatus(client["Offer Letter"])}</span></li>
@@ -163,6 +169,8 @@
             <li>Hiring Meeting:<span>${formatStatus(client["Hiring Company Meeting"])}</span></li>
             <li><strong>Final Status:</strong><span>${formatStatus(client["Final Status"])}</span></li>
           </ul>`;
+        out.innerHTML = html;
+        window.statusHTML = html;
       } else {
         out.innerHTML = `<p style="color:red; animation: shake 0.5s;">Client number not found.</p>`;
       }
@@ -174,9 +182,20 @@
         return `<span class="status-green">✅ ${value}</span>`;
       if (["no", "rejected", "not booked", "incomplete"].includes(val))
         return `<span class="status-red">❌ ${value}</span>`;
-      if (["pending", "in progress"].includes(val))
+      if (["pending", "in progress", "awaiting signed contract"].includes(val))
         return `<span class="status-orange">⏳ ${value}</span>`;
       return `<span>${value}</span>`;
+    }
+
+    function exportToPDF() {
+      const content = document.getElementById("statusOutput").innerHTML;
+      const win = window.open('', '', 'width=800,height=600');
+      win.document.write('<html><head><title>Application Status</title></head><body>');
+      win.document.write('<h2>Application Status</h2>');
+      win.document.write(content);
+      win.document.write('</body></html>');
+      win.document.close();
+      win.print();
     }
   </script>
 </head>
@@ -191,8 +210,10 @@
   </nav>
   <main>
     <h2>Enter Your Client Number</h2>
-    <input type="text" id="clientInput" placeholder="Enter your client application number" />
+    <input list="clientDropdown" id="clientInput" placeholder="Enter or select your client application number" />
+    <datalist id="clientDropdown"></datalist>
     <button onclick="searchClient()">Check Status</button>
+    <button onclick="exportToPDF()">Export to PDF</button>
     <div id="statusOutput"></div>
   </main>
   <footer>© 2016 Go‑Global Recruitment</footer>
