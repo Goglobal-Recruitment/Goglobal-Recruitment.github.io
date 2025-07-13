@@ -157,7 +157,7 @@
     function formatStatus(value) {
       if (!value) return `<span class="status-orange">⏳ Not available</span>`;
       const val = value.trim().toLowerCase();
-      const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled"];
+      const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled", "submitted"];
       const orange = ["pending", "awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete"];
 
