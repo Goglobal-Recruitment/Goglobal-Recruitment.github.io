@@ -79,9 +79,21 @@
       display: flex;
       justify-content: space-between;
     }
-    .status-green { color: #2ecc71; font-weight: bold; animation: fadeIn 1s ease-in-out; }
-    .status-red { color: #e74c3c; font-weight: bold; animation: shake 0.5s; }
-    .status-orange { color: #f39c12; font-weight: bold; animation: pulse 1.5s infinite; }
+    .status-green {
+      color: #2ecc71;
+      font-weight: bold;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .status-red {
+      color: #e74c3c;
+      font-weight: bold;
+      animation: shake 0.5s;
+    }
+    .status-orange {
+      color: #f39c12;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
     footer {
       margin-top: 2rem;
       font-size: 0.95rem;
@@ -158,11 +170,13 @@
 
     function formatStatus(value) {
       const val = value.toLowerCase();
-      if (["yes", "complete", "completed", "booked", "scheduled"].includes(val))
+      if (["yes", "accepted", "signed", "completed", "booked", "scheduled"].includes(val))
         return `<span class="status-green">✅ ${value}</span>`;
       if (["no", "rejected", "not booked"].includes(val))
         return `<span class="status-red">❌ ${value}</span>`;
-      return `<span class="status-orange">⏳ ${value}</span>`;
+      if (["pending", "incomplete", "in progress"].includes(val))
+        return `<span class="status-orange">⏳ ${value}</span>`;
+      return `<span>${value}</span>`;
     }
   </script>
 </head>
