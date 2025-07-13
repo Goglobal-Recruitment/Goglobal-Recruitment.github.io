@@ -56,7 +56,7 @@
       margin-bottom: 1.5rem;
     }
 
-    input[type="text"] {
+    input[type="text"], datalist {
       width: 100%;
       padding: 12px;
       font-size: 1rem;
@@ -144,11 +144,19 @@
         headers.forEach((h, i) => client[h.trim()] = cols[i]?.trim() || '');
         return client;
       });
+
+      // Populate dropdown
+      const dropdown = document.getElementById("clientDropdown");
+      clients.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c["Client Application Number"];
+        dropdown.appendChild(opt);
+      });
     }
 
     function searchClient() {
-      const input = document.getElementById("clientInput").value.trim();
-      const client = clients.find(c => c["Client Application Number"] === input);
+      const input = document.getElementById("clientInput").value.trim().toLowerCase();
+      const client = clients.find(c => c["Client Application Number"].trim().toLowerCase() === input);
       const out = document.getElementById("statusOutput");
       if (client) {
         out.innerHTML = `<ul>
@@ -171,8 +179,9 @@
     }
 
     function formatStatus(value) {
-      const val = value.toLowerCase();
-      const green = ["yes", "accepted", "booked", "completed", "signed", "scheduled"];
+      if (!value) return `<span class="status-orange">⏳ Not available</span>`;
+      const val = value.trim().toLowerCase();
+      const green = ["yes", "booked", "completed", "accepted", "signed", "scheduled"];
       const orange = ["pending", "awaiting signed contract", "in progress"];
       const red = ["no", "rejected", "not booked", "incomplete"];
 
@@ -195,7 +204,8 @@
   </nav>
   <main>
     <h2>Enter Your Client Number</h2>
-    <input type="text" id="clientInput" placeholder="Enter your client application number" />
+    <input list="clientDropdown" id="clientInput" placeholder="Enter or select your client number" />
+    <datalist id="clientDropdown"></datalist>
     <button onclick="searchClient()">Check Status</button>
     <div id="statusOutput"></div>
   </main>
