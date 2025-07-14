@@ -8,7 +8,7 @@ HBZ555,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Inco
 HBZ556,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ557,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ698,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-HBZ699,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,On Hold
+HBZ699,Yes,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected
 HBZ701,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ702,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ703,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
@@ -16,7 +16,7 @@ HBZ704,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Inco
 ZAP895,Yes,Accepted,Signed,Signed,Submitted,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 ZAP896,Yes,Accepted,Signed,Signed,Submitted,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 ZAP897,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-ZAP898,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+ZAP898,Yes,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected
 ZAP899,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-ZAP901,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-ZAP902,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+ZAP901,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,On Hold
+ZAP902,Yes,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected
