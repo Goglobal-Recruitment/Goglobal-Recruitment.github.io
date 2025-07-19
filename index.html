@@ -7,22 +7,42 @@
   <meta name="description" content="Go‑Global Recruitment connects skilled professionals across Africa with global job opportunities in the UK, Canada, and more. Empowering Talent. Enabling Journeys.">
 
   <style>
+    /* === Base Styles & Variables === */
+    :root {
+      --blue-primary: #003366;
+      --blue-accent: #0077cc;
+      --blue-light: #f9fbfe;
+      --blue-muted: #cce0ff;
+      --text-color: var(--blue-primary);
+      --background-color: var(--blue-light);
+    }
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      background-color: #f9fbfe;
-      color: #003366; /* Changed to match brand text color */
+      background-color: var(--background-color);
+      color: var(--text-color);
       opacity: 0;
       transition: opacity 0.6s ease-in;
+      scroll-behavior: smooth;
     }
-
     body.fade-in { opacity: 1; }
 
+    /* === Header === */
     .site-header {
-      background-color: #ffffff;
+      background-color: #fff;
       padding: 1rem 0;
-      border-bottom: 1px solid #cccccc;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease;
+    }
+    .site-header.scrolled {
+      background-color: var(--blue-light);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .container {
@@ -38,67 +58,113 @@
     .logo-link {
       display: inline-block;
     }
-
     .site-logo {
       height: 50px;
       width: auto;
       max-width: 100%;
+      transition: transform 0.3s ease;
+    }
+    .logo-link:hover .site-logo {
+      transform: scale(1.05);
     }
 
+    /* === Navigation === */
     .nav-menu {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
     }
-
     .nav-menu a {
       text-decoration: none;
-      color: #003366; /* Primary brand blue */
-      font-weight: bold;
+      color: var(--text-color);
+      font-weight: 700;
       font-size: 1.1em;
+      position: relative;
+      padding-bottom: 4px;
       transition: color 0.3s ease;
     }
-
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--blue-accent);
+      transition: width 0.3s ease;
+    }
     .nav-menu a:hover {
-      color: #0077cc; /* Accent blue on hover */
+      color: var(--blue-accent);
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
     }
 
+    /* === Hero Section === */
     .hero {
-      background-color: #003366;
+      background-color: var(--blue-primary);
       color: white;
-      padding: 4rem 1rem;
+      padding: 6rem 1rem 5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-
     .hero h1 {
-      font-size: 3em;
+      font-size: 3.2em;
       margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      animation: slideDownFadeIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(-20px);
     }
-
     .hero p {
-      font-size: 1.3em;
+      font-size: 1.4em;
       margin: 0;
+      animation: slideUpFadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
+    @keyframes slideDownFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes slideUpFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === Sections === */
     .section {
       max-width: 1000px;
       margin: 60px auto;
       padding: 0 20px;
       animation: fadeInUp 0.8s ease-out both;
+      opacity: 0;
+      transform: translateY(30px);
     }
-
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* === Feature Cards === */
     .features, .stats {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: space-between;
     }
-
     .card {
       background: white;
       border-radius: 12px;
@@ -106,74 +172,141 @@
       flex: 1 1 30%;
       padding: 1.5rem;
       text-align: center;
-      transition: transform 0.3s ease;
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
     }
-
     .card h3 {
-      color: #003366; /* Brand blue for headings */
+      color: var(--blue-primary);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
     }
 
+    /* === Stats Boxes === */
     .stat-box {
       text-align: center;
       flex: 1;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s ease;
+      cursor: default;
     }
-
+    .stat-box:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
     .stat-box span {
-      font-size: 2.4rem;
-      font-weight: bold;
-      color: #003366; /* Brand blue for numbers */
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--blue-primary);
+      display: block;
+      margin-bottom: 0.3rem;
     }
 
+    /* === Tracking Section === */
+    .tracking {
+      background: var(--blue-muted);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 600px;
+      margin: 40px auto 60px;
+      text-align: center;
+    }
+    .tracking h2 {
+      color: var(--blue-primary);
+      margin-bottom: 1rem;
+    }
+    .tracking input[type="text"] {
+      width: 70%;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--blue-primary);
+      margin-right: 0.5rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .tracking input[type="text"]:focus {
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 8px var(--blue-accent);
+    }
+    .tracking button {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: var(--blue-primary);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .tracking button:hover {
+      background-color: var(--blue-accent);
+    }
+    .tracking-result {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--blue-primary);
+      min-height: 1.5em;
+    }
+
+    /* === Footer === */
     footer {
       text-align: center;
       padding: 1rem;
-      background: #ffffff;
-      border-top: 1px solid #cccccc;
+      background: #fff;
+      border-top: 1px solid #ccc;
       font-size: 0.9rem;
-      color: #003366; /* Unified footer text color */
+      color: var(--blue-primary);
       margin-top: 60px;
     }
 
+    /* === Responsive === */
     @media (max-width: 768px) {
       .features, .stats {
         flex-direction: column;
         align-items: center;
       }
-
       .nav-menu {
         flex-direction: column;
         gap: 10px;
         align-items: center;
         margin-top: 10px;
       }
-
       .container {
         flex-direction: column;
         align-items: center;
       }
-
       .site-logo {
         margin-bottom: 10px;
       }
-
       .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
       }
-
       .hero p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+      }
+      .tracking input[type="text"] {
+        width: 100%;
+        margin-bottom: 0.7rem;
+      }
+      .tracking button {
+        width: 100%;
       }
     }
   </style>
 
   <script>
+    // Fade in body on load
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
 
+      // Animate counters
       const startDate = new Date("2016-01-01T00:00:00Z");
       const now = new Date();
       const hoursPassed = Math.floor((now - startDate) / (1000 * 60 * 60));
@@ -203,6 +336,47 @@
       animateValue("contracts", contracts, 3000);
       animateValue("experience", 19, 1000);
       animateValue("hires", hires, 3000);
+
+      // Animate section fade-ins on scroll
+      const sections = document.querySelectorAll('.section');
+      const options = { threshold: 0.2 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, options);
+      sections.forEach(section => observer.observe(section));
+    });
+
+    // Simple tracking example (replace with real API/backend integration)
+    function trackApplication() {
+      const input = document.getElementById('tracking-code');
+      const result = document.getElementById('tracking-result');
+      const code = input.value.trim();
+      if (!code) {
+        result.textContent = "Please enter your tracking code.";
+        return;
+      }
+      // Example tracking logic:
+      if (code.toUpperCase() === 'GOGLOBAL123') {
+        result.textContent = "Status: Your application is being processed.";
+      } else if (code.toUpperCase() === 'GOGLOBAL456') {
+        result.textContent = "Status: Your visa is approved.";
+      } else {
+        result.textContent = "Status: Tracking code not found.";
+      }
+    }
+
+    // Sticky header background change on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.site-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
   </script>
 </head>
@@ -211,7 +385,7 @@
   <div class="site-header">
     <div class="container">
       <a href="index.html" class="logo-link">
-        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo">
+        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo" />
       </a>
       <nav class="nav-menu">
         <a href="index.html">Home</a>
@@ -223,46 +397,63 @@
     </div>
   </div>
 
-  <section class="hero">
+  <section class="hero" aria-label="Main banner">
     <h1>Go‑Global Recruitment</h1>
     <p>Empowering Talent. Enabling Journeys.</p>
   </section>
 
-  <div class="section">
-    <h2>Why Choose Go‑Global?</h2>
+  <div class="section" aria-labelledby="why-choose-heading">
+    <h2 id="why-choose-heading">Why Choose Go‑Global?</h2>
     <div class="features">
-      <div class="card">
+      <div class="card" tabindex="0">
         <h3>✈️ Visa Sponsorship</h3>
         <p>Full support for international placements including visas and relocation.</p>
       </div>
-      <div class="card">
+      <div class="card" tabindex="0">
         <h3>🌍 Global Reach</h3>
         <p>Opportunities across industries in Africa, the UK, Canada, and beyond.</p>
       </div>
-      <div class="card">
+      <div class="card" tabindex="0">
         <h3>🤝 Career Support</h3>
         <p>We guide you through documentation, coaching, and cultural readiness.</p>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <h2>About Go‑Global</h2>
+  <div class="section" aria-labelledby="about-heading">
+    <h2 id="about-heading">About Go‑Global</h2>
     <p>At Go‑Global Recruitment, we believe great teamwork makes the dream work. Our mission is to connect skilled professionals with life-changing career opportunities. Whether you're seeking your first international role or the next step in your global journey, we’re here to support you every step of the way.</p>
     <p><a href="about.html">Learn more about us →</a></p>
   </div>
 
-  <div class="section">
-    <h2>Some Cool Facts</h2>
+  <!-- Tracking Page Section (replaces Job Openings) -->
+  <div class="section tracking" aria-labelledby="tracking-heading">
+    <h2 id="tracking-heading">Track Your Application</h2>
+    <input
+      id="tracking-code"
+      type="text"
+      placeholder="Enter your tracking code"
+      aria-label="Tracking code input"
+      autocomplete="off"
+    />
+    <button onclick="trackApplication()" aria-label="Track Application Status">Track</button>
+    <div id="tracking-result" class="tracking-result" role="alert" aria-live="polite"></div>
+  </div>
+
+  <div class="section" aria-labelledby="facts-heading">
+    <h2 id="facts-heading">Some Cool Facts</h2>
     <div class="stats">
-      <div class="stat-box">
-        <span id="contracts">0</span><br/>Contracts
+      <div class="stat-box" tabindex="0">
+        <span id="contracts">0</span>
+        Contracts
       </div>
-      <div class="stat-box">
-        <span id="experience">0</span><br/>Years Experience
+      <div class="stat-box" tabindex="0">
+        <span id="experience">0</span>
+        Years Experience
       </div>
-      <div class="stat-box">
-        <span id="hires">0</span><br/>People Hired
+      <div class="stat-box" tabindex="0">
+        <span id="hires">0</span>
+        People Hired
       </div>
     </div>
   </div>
