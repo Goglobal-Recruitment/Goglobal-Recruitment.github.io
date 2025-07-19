@@ -7,42 +7,22 @@
   <meta name="description" content="Go‑Global Recruitment connects skilled professionals across Africa with global job opportunities in the UK, Canada, and more. Empowering Talent. Enabling Journeys.">
 
   <style>
-    /* === Base Styles & Variables === */
-    :root {
-      --blue-primary: #003366;
-      --blue-accent: #0077cc;
-      --blue-light: #f9fbfe;
-      --blue-muted: #cce0ff;
-      --text-color: var(--blue-primary);
-      --background-color: var(--blue-light);
-    }
-
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
+      background-color: #f9fbfe;
+      color: #003366; /* Changed to match brand text color */
       opacity: 0;
       transition: opacity 0.6s ease-in;
-      scroll-behavior: smooth;
     }
+
     body.fade-in { opacity: 1; }
 
-    /* === Header === */
     .site-header {
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 1rem 0;
-      border-bottom: 1px solid #ccc;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      transition: background-color 0.3s ease;
-    }
-    .site-header.scrolled {
-      background-color: var(--blue-light);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-bottom: 1px solid #cccccc;
     }
 
     .container {
@@ -58,66 +38,237 @@
     .logo-link {
       display: inline-block;
     }
+
     .site-logo {
       height: 50px;
       width: auto;
       max-width: 100%;
-      transition: transform 0.3s ease;
-    }
-    .logo-link:hover .site-logo {
-      transform: scale(1.05);
     }
 
-    /* === Navigation === */
     .nav-menu {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
     }
+
     .nav-menu a {
       text-decoration: none;
-      color: var(--text-color);
-      font-weight: 700;
+      color: #003366; /* Primary brand blue */
+      font-weight: bold;
       font-size: 1.1em;
-      position: relative;
-      padding-bottom: 4px;
       transition: color 0.3s ease;
     }
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--blue-accent);
-      transition: width 0.3s ease;
-    }
+
     .nav-menu a:hover {
-      color: var(--blue-accent);
-    }
-    .nav-menu a:hover::after {
-      width: 100%;
+      color: #0077cc; /* Accent blue on hover */
     }
 
-    /* === Hero Section === */
     .hero {
-      background-color: var(--blue-primary);
+      background-color: #003366;
       color: white;
-      padding: 6rem 1rem 5rem;
+      padding: 4rem 1rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
+
     .hero h1 {
-      font-size: 3.2em;
+      font-size: 3em;
       margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-      animation: slideDownFadeIn 1s ease forwards;
-      opacity: 0;
-      transform: translateY(-20px);
     }
+
     .hero p {
-      font-size: 1.4em;
+      font-size: 1.3em;
       margin: 0;
-      animation: slideUpFadeIn 1s e
+    }
+
+    .section {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .features, .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      flex: 1 1 30%;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: #003366; /* Brand blue for headings */
+    }
+
+    .stat-box {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-box span {
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: #003366; /* Brand blue for numbers */
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ffffff;
+      border-top: 1px solid #cccccc;
+      font-size: 0.9rem;
+      color: #003366; /* Unified footer text color */
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .features, .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .site-logo {
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+
+      const startDate = new Date("2016-01-01T00:00:00Z");
+      const now = new Date();
+      const hoursPassed = Math.floor((now - startDate) / (1000 * 60 * 60));
+      const ratePerHour = 2;
+
+      const baseContracts = 151;
+      const baseHires = 15501;
+      const contracts = baseContracts + (hoursPassed * ratePerHour);
+      const hires = baseHires + (hoursPassed * ratePerHour);
+
+      function animateValue(id, end, duration) {
+        const obj = document.getElementById(id);
+        let start = 0;
+        const range = end - start;
+        const stepTime = Math.max(Math.floor(duration / range), 10);
+        let current = start;
+        const timer = setInterval(() => {
+          current += 1;
+          if (current >= end) {
+            current = end;
+            clearInterval(timer);
+          }
+          obj.textContent = current.toLocaleString();
+        }, stepTime);
+      }
+
+      animateValue("contracts", contracts, 3000);
+      animateValue("experience", 19, 1000);
+      animateValue("hires", hires, 3000);
+    });
+  </script>
+</head>
+
+<body>
+  <div class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo-link">
+        <img src="goglobal-logo-header.svg" alt="Go-Global Logo" class="site-logo">
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="expertise.html">Expertise</a>
+        <a href="application-tracker.html">Track Application</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1>Go‑Global Recruitment</h1>
+    <p>Empowering Talent. Enabling Journeys.</p>
+  </section>
+
+  <div class="section">
+    <h2>Why Choose Go‑Global?</h2>
+    <div class="features">
+      <div class="card">
+        <h3>✈️ Visa Sponsorship</h3>
+        <p>Full support for international placements including visas and relocation.</p>
+      </div>
+      <div class="card">
+        <h3>🌍 Global Reach</h3>
+        <p>Opportunities across industries in Africa, the UK, Canada, and beyond.</p>
+      </div>
+      <div class="card">
+        <h3>🤝 Career Support</h3>
+        <p>We guide you through documentation, coaching, and cultural readiness.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>About Go‑Global</h2>
+    <p>At Go‑Global Recruitment, we believe great teamwork makes the dream work. Our mission is to connect skilled professionals with life-changing career opportunities. Whether you're seeking your first international role or the next step in your global journey, we’re here to support you every step of the way.</p>
+    <p><a href="about.html">Learn more about us →</a></p>
+  </div>
+
+  <div class="section">
+    <h2>Some Cool Facts</h2>
+    <div class="stats">
+      <div class="stat-box">
+        <span id="contracts">0</span><br/>Contracts
+      </div>
+      <div class="stat-box">
+        <span id="experience">0</span><br/>Years Experience
+      </div>
+      <div class="stat-box">
+        <span id="hires">0</span><br/>People Hired
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2016 Go‑Global Recruitment. All rights reserved.
+  </footer>
+</body>
+</html>
