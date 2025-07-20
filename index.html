@@ -1,58 +1,217 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Go‑Global Recruitment | Home</title>
+  <meta charset="UTF-8" />
+  <title>Go‑Global Recruitment | Empowering Talent</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Go‑Global Recruitment connects global talent with international opportunities.">
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #f9fbfe;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #003366, #0059b3);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    nav {
+      background-color: #003366;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .features, .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      flex: 1 1 30%;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .card h3 {
+      color: #003366;
+    }
+    .stat-box {
+      text-align: center;
+      flex: 1;
+    }
+    .stat-box span {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #003366;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #003366;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.6s ease-in;
+    }
+    body.fade-in {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <img src="goglobal-logo-header.svg" alt="Go‑Global Logo" class="logo" />
-    <nav class="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="expertise.html">Expertise</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+<header style="background: url('https://images.unsplash.com/photo-1573164574396-9d5f46c3d1c9?auto=format&fit=crop&w=1200&q=80') no-repeat center center / cover; height: 400px;">
+  <div style="background: rgba(0,0,0,0.6); height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;">
+    <h1>Go‑Global Recruitment</h1>
+    <p>Empowering Talent. Enabling Journeys.</p>
+  </div>
+</header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-heading">
-      <h1 id="hero-heading">Welcome to Go‑Global Recruitment</h1>
-      <p>We help talented professionals connect with global job opportunities.</p>
-      <a href="about.html" class="button">Learn More</a>
-    </section>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="expertise.html">Expertise</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
-    <!-- Tracker Button Section -->
-    <section class="section tracking" aria-labelledby="tracking-heading">
-      <h2 id="tracking-heading">Track Your Application</h2>
-      <p>You can view and follow your application progress in real-time via our live tracker.</p>
-      <a href="YOUR_GOOGLE_SHEET_LINK_HERE" target="_blank" style="display:inline-block;padding:12px 24px;background:#003366;color:#fff;font-weight:bold;border-radius:6px;text-decoration:none;">
-        Open Application Tracker
-      </a>
-    </section>
+<div class="section">
+  <h2>Why Choose Go‑Global?</h2>
+  <div class="features">
+    <div class="card">
+      <h3>✈️ Visa Sponsorship</h3>
+      <p>Full support for international placements including visas and relocation.</p>
+    </div>
+    <div class="card">
+      <h3>🌍 Global Reach</h3>
+      <p>Opportunities across industries in Africa, the UK, Canada, and beyond.</p>
+    </div>
+    <div class="card">
+      <h3>🤝 Career Support</h3>
+      <p>We guide you through documentation, coaching, and cultural readiness.</p>
+    </div>
+  </div>
+</div>
 
-    <section class="section about" aria-labelledby="about-heading">
-      <h2 id="about-heading">Why Choose Us?</h2>
-      <p>We have a strong network of employers across the UK, Germany, Canada, and more. Our dedicated team supports candidates through every step of the relocation and employment process.</p>
-    </section>
+<div class="section">
+  <h2>About Go‑Global</h2>
+  <p>At Go‑Global Recruitment, we believe great teamwork makes the dream work. Our mission is to connect skilled professionals with life-changing career opportunities. Whether you're seeking your first international role or the next step in your global journey, we’re here to support you every step of the way.</p>
+  <p><a href="about.html">Learn more about us →</a></p>
+</div>
 
-    <section class="section countries" aria-labelledby="countries-heading">
-      <h2 id="countries-heading">Recruitment Countries</h2>
-      <ul>
-        <li>🇬🇧 United Kingdom</li>
-        <li>🇩🇪 Germany</li>
-        <li>🇨🇦 Canada</li>
-        <li>🇸🇦 Saudi Arabia</li>
-        <li>🇶🇦 Qatar</li>
-      </ul>
-    </section>
-  </main>
+<div class="section">
+  <h2>Some Cool Facts</h2>
+  <div class="stats">
+    <div class="stat-box">
+      <span id="contracts">0</span><br>Contracts
+    </div>
+    <div class="stat-box">
+      <span id="experience">0</span><br>Years Experience
+    </div>
+    <div class="stat-box">
+      <span id="hires">0</span><br>People Hired
+    </div>
+  </div>
+</div>
 
-  <footer class="footer" aria-label="Footer">
-    <p>&copy; 2025 Go‑Global Recruitment. Company No: 09292036</p>
-  </footer>
+<footer>
+  &copy; 2025 Go‑Global Recruitment. All rights reserved.
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("fade-in");
+
+    function animateValue(id, end, duration) {
+      const obj = document.getElementById(id);
+      let start = 0;
+      const range = end - start;
+      const stepTime = Math.max(Math.floor(duration / range), 10);
+      let current = start;
+      const timer = setInterval(() => {
+        current += 1;
+        if (current >= end) {
+          current = end;
+          clearInterval(timer);
+        }
+        obj.textContent = current.toLocaleString();
+      }, stepTime);
+    }
+
+    animateValue("contracts", 151, 1000);
+    animateValue("experience", 15, 1000);
+    animateValue("hires", 15501, 1000);
+  });
+</script>
+
 </body>
 </html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("fade-in");
+
+    // Start date (adjust as needed)
+    const startDate = new Date("2024-01-01T00:00:00Z");
+    const now = new Date();
+    const hoursPassed = Math.floor((now - startDate) / (1000 * 60 * 60));
+    const ratePerHour = 2;
+
+    // Base values
+    const baseContracts = 151;
+    const baseHires = 15501;
+    const contracts = baseContracts + (hoursPassed * ratePerHour);
+    const hires = baseHires + (hoursPassed * ratePerHour);
+
+    function animateValue(id, end, duration) {
+      const obj = document.getElementById(id);
+      let start = 0;
+      const range = end - start;
+      const stepTime = Math.max(Math.floor(duration / range), 10);
+      let current = start;
+      const timer = setInterval(() => {
+        current += 1;
+        if (current >= end) {
+          current = end;
+          clearInterval(timer);
+        }
+        obj.textContent = current.toLocaleString();
+      }, stepTime);
+    }
+
+    animateValue("contracts", contracts, 4000);  // Slower scroll
+    animateValue("experience", 15, 1000);        // Normal scroll
+    animateValue("hires", hires, 4000);          // Slower scroll
+  });
+</script>
