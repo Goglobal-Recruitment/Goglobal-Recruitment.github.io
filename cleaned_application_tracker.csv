@@ -1,9 +1,9 @@
 ﻿Client Application Number,CV Uploaded,Offer Letter,Go-Global Service Agreement,Employment Contract,Debtform/Schedule,Client Service booking,Biometrics Booking,Medical Booked,Psychologist Booking,Elites Test Booking,Hiring Company Meeting,Final Status
-HBZ540,Yes,Accepted,Signed,Awaiting Signed Contract,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+HBZ540,Yes,Accepted,Signed,Signed,Pending,Scheduled end August ,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ551,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ552,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ553,Accepted,Signed,Awaiting Signed Contract,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-HBZ554,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+HBZ554,Yes,Pending,Signed,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ555,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ556,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ557,Yes,Issued,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
@@ -13,8 +13,8 @@ HBZ701,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Inco
 HBZ702,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ703,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ704,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-ZAP895,Yes,Accepted,Signed,Signed,Submitted,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-ZAP896,Yes,Accepted,Signed,Signed,Submitted,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+ZAP895,Yes,Accepted,Signed,Signed,Submitted,Scheduled end August ,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+ZAP896,Yes,Accepted,Signed,Signed,Submitted,Scheduled end August ,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 ZAP897,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 ZAP898,Yes,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected,Rejected
 ZAP899,Yes,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
