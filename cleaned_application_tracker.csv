@@ -6,14 +6,14 @@ HBZ552,Accepted,Accepted,Signed,Signed,Pending,Not Booked,Incomplete,Incomplete,
 HBZ555,Accepted,Accepted,Signed,Signed,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 ZAP902,Accepted,Accepted,Signed,Signed,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ554,Accepted,Accepted,Signed,Signed,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-HBZ551,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-SWE984,Pending,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-SWE985,Pending,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+HBZ551,Accepted,Accepted,Signed,Pending signed copy ,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+SWE985,Accepted,Pending signed copy ,Pending signed copy ,Pending signed copy ,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+SWE984,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ553,Accepted,Accepted,Awaiting Signed Contract,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,On HOLD 
-HBZ705,Pending,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,
 HBZ701,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ702,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ557,Accepted,Issued,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ704,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
-SWE986,Pending,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+SWE986,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
 HBZ698,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,In Progress
+HBZ705,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Incomplete,
