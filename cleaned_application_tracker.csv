@@ -1,17 +1,12 @@
-﻿Client Application Number,CV Uploaded,Offer Letter,Go-Global Service Agreement,Employment Contract,Debtform/Schedule,Client Service booking,Biometrics Booking,Medical Booked,Psychologist Booking,Elites Test Booking,Start Date,Hiring Company Meeting,Final Status
-HBZ540,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/12/03,November ,Debt Form Stage 
-HBZ551,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/12/03,November ,Debt Form Stage 
-HBZ552,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/12/03,November ,Debt Form Stage 
-HBZ553,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/11/13,October,Debt Form Stage 
-HBZ554,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/11/24,October,Debt Form Stage 
-HBZ555,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/11/21,October,Debt Form Stage 
-HBZ701,Accepted,Accepted,Signed,Signed,Pending,September,October,October,October,October ,2025/11/28,October,Debt Form Stage 
-ZAP895,Accepted,Accepted,Signed,Signed,Submitted,September,October,October,October,October ,2026/01/07,December,In Progress
-ZAP896,Accepted,Accepted,Signed,Signed,Submitted,September,October,October,October,October ,2025/12/22,November ,Debt Form Stage 
-ZAP902,Accepted,Accepted,Signed,Signed,Submitted,September,October,October,October,October ,2025/11/21,October,In Progress
-HBL201,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
-HBL269,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
-YDE596,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
-SWE986,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
-SWE987,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
-TYR890,Accepted,Pending,Pending,Pending,Pending,Not Booked,Incomplete,Incomplete,Incomplete,Incomplete,Pending,Incomplete,New Application 
+﻿Client Application Number,CV Uploaded,Go-Global Service Agreement,Offer Letter,Employment Contract,Debtform/Schedule,Client Service booking,Biometrics Booking,Medical Booked,Psychologist Booking,Elites Test Booking,Start Date,Final Status
+HBZ540,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/12/03,Pending Legal Action
+HBZ551,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/12/03,Pending Legal Action
+HBZ552,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/12/03,Pending Legal Action
+HBZ553,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/11/13,Pending Legal Action
+HBZ554,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/11/24,Pending Legal Action
+HBZ701,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/11/28,Pending Legal Action
+ZAP895,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2026/01/07,Pending Legal Action
+ZAP896,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/12/22,Pending Legal Action
+ZAP902,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/11/21,Pending Legal Action
+PHR950,Accepted,Signed,Accepted,Signed,Submitted,2025/10/25,November,November,November,November,2025/12/28,Pending Legal Action
+TYR890,Accepted,Signed,Accepted,Signed,Pending,2025/10/25,November,November,November,November,2025/12/28,Booking Stage 
